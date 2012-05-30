@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="base">
+      <UniqueIdentifier>{4d30190f-241e-42c0-b42b-9f1d2aa06ca5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="windows">
+      <UniqueIdentifier>{e65884be-f76b-44a8-a9b2-e017ccccc1b5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="windows\glog">
+      <UniqueIdentifier>{d309f3da-41d2-48d8-96ef-ce8e0870f866}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="logging.cc" />
+    <ClCompile Include="raw_logging.cc" />
+    <ClCompile Include="utilities.cc" />
+    <ClCompile Include="vlog_is_on.cc" />
+    <ClCompile Include="windows\port.cc">
+      <Filter>windows</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="utilities.h" />
+    <ClInclude Include="base\commandlineflags.h">
+      <Filter>base</Filter>
+    </ClInclude>
+    <ClInclude Include="base\googleinit.h">
+      <Filter>base</Filter>
+    </ClInclude>
+    <ClInclude Include="base\mutex.h">
+      <Filter>base</Filter>
+    </ClInclude>
+    <ClInclude Include="windows\glog\log_severity.h">
+      <Filter>windows\glog</Filter>
+    </ClInclude>
+    <ClInclude Include="windows\glog\logging.h">
+      <Filter>windows\glog</Filter>
+    </ClInclude>
+    <ClInclude Include="windows\glog\raw_logging.h">
+      <Filter>windows\glog</Filter>
+    </ClInclude>
+    <ClInclude Include="windows\glog\stl_logging.h">
+      <Filter>windows\glog</Filter>
+    </ClInclude>
+    <ClInclude Include="windows\glog\vlog_is_on.h">
+      <Filter>windows\glog</Filter>
+    </ClInclude>
+    <ClInclude Include="windows\config.h">
+      <Filter>windows</Filter>
+    </ClInclude>
+    <ClInclude Include="windows\port.h">
+      <Filter>windows</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="windows\preprocess.sh">
+      <Filter>windows</Filter>
+    </None>
+  </ItemGroup>
+</Project>

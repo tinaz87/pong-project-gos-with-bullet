@@ -1,0 +1,2 @@
+glog 0.3.2
+see http://google-glog.googlecode.com/svn/trunk/doc/glog.html
