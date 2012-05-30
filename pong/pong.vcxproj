@@ -1,0 +1,192 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{E036DAAC-B80E-40ED-870E-8A32A8B906E0}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>pong</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+    <IncludePath>$(DXSDK_DIR)Include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(DXSDK_DIR)Lib\x86;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;USE_DX;_DEBUG;_WINDOWS;GLOG_NO_ABBREVIATED_SEVERITIES;GOOGLE_GLOG_DLL_DECL=;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\Users\PROBOOK\Desktop\pong\DXUT\Optional;..\DXUT\Core;sound\Source;sound\Include;graphics\Include;utility\Include;gameObjects\Include;physics\Include;game\Include;..\glog\windows;C:\Program Files %28x86%29\Microsoft DirectX SDK %28February 2010%29\Include;memory\Include;resource\Include;..\Bullet;input\Include;rules\Include</AdditionalIncludeDirectories>
+      <PreprocessToFile>false</PreprocessToFile>
+      <PrecompiledHeaderFile>
+      </PrecompiledHeaderFile>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>x3daudio.lib;d3dxof.lib;dxguid.lib;d3dx9d.lib;d3d9.lib;winmm.lib;d3dx10d.lib;dxerr.lib;comctl32.lib;$(SolutionDir)$(Configuration)\glog.lib;$(SolutionDir)$(Configuration)\Bullet.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\Program Files %28x86%29\Microsoft DirectX SDK %28February 2010%29\Lib\x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <Optimization>Full</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;USE_DX;NDEBUG;_WINDOWS;GLOG_NO_ABBREVIATED_SEVERITIES;GOOGLE_GLOG_DLL_DECL=;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>DXUT\Core;graphics\Include;utility\Include;gameObjects\Include;physics\Include;game\Include;..\glog\windows;C:\Program Files %28x86%29\Microsoft DirectX SDK %28February 2010%29\Include;memory\Include;resource\Include;..\Bullet;input\Include;rules\Include</AdditionalIncludeDirectories>
+      <PreprocessToFile>false</PreprocessToFile>
+      <PrecompiledHeaderFile>
+      </PrecompiledHeaderFile>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalDependencies>d3dxof.lib;dxguid.lib;d3dx9.lib;d3d9.lib;winmm.lib;$(SolutionDir)$(Configuration)\glog.lib;$(SolutionDir)$(Configuration)\Bullet.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\Program Files %28x86%29\Microsoft DirectX SDK %28February 2010%29\Lib\x86</AdditionalLibraryDirectories>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <None Include="pong.ico" />
+    <None Include="ReadMe.txt" />
+    <None Include="resource\Include\Handle.inl" />
+    <None Include="resource\Include\HandleMgr.inl" />
+    <None Include="small.ico" />
+    <None Include="utility\Include\Publisher.inl" />
+    <None Include="utility\Include\Subscriber.inl" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\DXUT\Optional\SDKwavefile.h" />
+    <ClInclude Include="gameObjects\Include\Component.h" />
+    <ClInclude Include="gameObjects\Include\GameObjectSystem.h" />
+    <ClInclude Include="gameObjects\Include\ObjectProperty.h" />
+    <ClInclude Include="game\Include\background.h" />
+    <ClInclude Include="game\Include\ball.h" />
+    <ClInclude Include="game\Include\bumper.h" />
+    <ClInclude Include="graphics\Include\gfxGeometry.h" />
+    <ClInclude Include="graphics\Include\gfxTexture.h" />
+    <ClInclude Include="graphics\Include\graphicsComponent.h" />
+    <ClInclude Include="graphics\Include\graphicsDebugger.h" />
+    <ClInclude Include="graphics\Include\textureManager.h" />
+    <ClInclude Include="Input\Include\InputManager.h" />
+    <ClInclude Include="Input\Include\KeyboardInputManager.h" />
+    <ClInclude Include="Input\Include\PositionControllerComponent.h" />
+    <ClInclude Include="Input\Include\PositionControllerProperty.h" />
+    <ClInclude Include="memory\Include\CustomMemory.h" />
+    <ClInclude Include="memory\Include\hpha.h" />
+    <ClInclude Include="physics\Include\motionState.h" />
+    <ClInclude Include="physics\Include\physicsBody.h" />
+    <ClInclude Include="physics\Include\physicsComponent.h" />
+    <ClInclude Include="physics\Include\physicsGfxDebugger.h" />
+    <ClInclude Include="physics\Include\position.h" />
+    <ClInclude Include="pong.h" />
+    <ClInclude Include="Resource.h" />
+    <ClInclude Include="resource\Include\Handle.h" />
+    <ClInclude Include="resource\Include\HandleMgr.h" />
+    <ClInclude Include="rules\Include\EndState.h" />
+    <ClInclude Include="rules\Include\gameRulesComponent.h" />
+    <ClInclude Include="rules\Include\GameState.h" />
+    <ClInclude Include="rules\Include\PauseState.h" />
+    <ClInclude Include="rules\Include\StartState.h" />
+    <ClInclude Include="sound\Include\AudioWrapper.h" />
+    <ClInclude Include="stdafx.h" />
+    <ClInclude Include="targetver.h" />
+    <ClInclude Include="utility\Include\Allocator.h" />
+    <ClInclude Include="utility\Include\Containers.h" />
+    <ClInclude Include="utility\Include\dataTypes.h" />
+    <ClInclude Include="utility\Include\FiniteStateMachine.h" />
+    <ClInclude Include="utility\Include\FSMState.h" />
+    <ClInclude Include="utility\Include\ObjectId.h" />
+    <ClInclude Include="utility\Include\PlayerId.h" />
+    <ClInclude Include="utility\Include\Publisher.h" />
+    <ClInclude Include="utility\Include\Singleton.h" />
+    <ClInclude Include="utility\Include\StringHash.h" />
+    <ClInclude Include="utility\Include\Subscriber.h" />
+    <ClInclude Include="utility\Include\TransitionObserver.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\DXUT\Optional\SDKwavefile.cpp" />
+    <ClCompile Include="gameObjects\Source\Component.cpp" />
+    <ClCompile Include="gameObjects\Source\GameObjectSystem.cpp" />
+    <ClCompile Include="gameObjects\Source\ObjectProperty.cpp" />
+    <ClCompile Include="game\Source\background.cpp" />
+    <ClCompile Include="game\Source\ball.cpp" />
+    <ClCompile Include="game\Source\bumper.cpp" />
+    <ClCompile Include="graphics\Source\gfxGeometry.cpp" />
+    <ClCompile Include="graphics\Source\gfxTexture.cpp" />
+    <ClCompile Include="graphics\Source\graphicsComponent.cpp" />
+    <ClCompile Include="graphics\Source\graphicsDebugger.cpp" />
+    <ClCompile Include="graphics\Source\textureManager.cpp" />
+    <ClCompile Include="Input\Source\InputManager.cpp" />
+    <ClCompile Include="Input\Source\KeyboardInputManager.cpp" />
+    <ClCompile Include="Input\Source\PositionControllerComponent.cpp" />
+    <ClCompile Include="Input\Source\PositionControllerProperty.cpp" />
+    <ClCompile Include="memory\Source\hpha.cpp" />
+    <ClCompile Include="physics\Source\motionState.cpp" />
+    <ClCompile Include="physics\Source\physicsBody.cpp" />
+    <ClCompile Include="physics\Source\physicsComponent.cpp" />
+    <ClCompile Include="physics\Source\physicsGfxDebugger.cpp" />
+    <ClCompile Include="physics\Source\position.cpp" />
+    <ClCompile Include="pong.cpp" />
+    <ClCompile Include="rules\Source\EndState.cpp" />
+    <ClCompile Include="rules\Source\gameRulesComponent.cpp" />
+    <ClCompile Include="rules\Source\GameState.cpp" />
+    <ClCompile Include="rules\Source\PauseState.cpp" />
+    <ClCompile Include="rules\Source\StartState.cpp" />
+    <ClCompile Include="sound\Source\AudioWrapper.cpp" />
+    <ClCompile Include="stdafx.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="utility\Source\dataTypes.cpp" />
+    <ClCompile Include="utility\Source\FiniteStateMachine.cpp" />
+    <ClCompile Include="utility\Source\FSMState.cpp" />
+    <ClCompile Include="utility\Source\StringHash.cpp" />
+    <ClCompile Include="utility\Source\TransitionObserver.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="pong.rc" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

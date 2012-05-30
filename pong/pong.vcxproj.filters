@@ -1,0 +1,329 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="graphics">
+      <UniqueIdentifier>{d86dacba-d26f-446d-bdc1-06406c6b04f1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="utility">
+      <UniqueIdentifier>{7549203d-eba6-48ed-b949-d72d6bf0ec1a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="gameObjects">
+      <UniqueIdentifier>{c9551b23-d9a5-4818-ae25-e8125cd3d670}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="physics">
+      <UniqueIdentifier>{343b10c1-020c-48c5-b62c-3ef823b7f9b8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="game">
+      <UniqueIdentifier>{987cac19-eec6-42f4-ad1b-301c02fa2a29}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="memory">
+      <UniqueIdentifier>{0819261d-f8d7-42d4-b8ee-3447dc669ef3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="resource">
+      <UniqueIdentifier>{c6db841e-6329-4b04-9af9-e566aa8bf07e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="graphics\DX">
+      <UniqueIdentifier>{5a7d5993-730d-40bf-a2a3-1422ffd25b88}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="input">
+      <UniqueIdentifier>{04a4032b-f3cb-4578-8cff-fbd2f1be64bd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="rules">
+      <UniqueIdentifier>{b061fd68-f136-49ca-8075-583fdf213741}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="utility\FMS">
+      <UniqueIdentifier>{05da34d8-6e76-4f18-b0dd-4e792928990a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="sound">
+      <UniqueIdentifier>{1e771a56-320f-402e-89dc-8752965347fe}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ReadMe.txt" />
+    <None Include="small.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="pong.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="resource\Include\Handle.inl">
+      <Filter>resource</Filter>
+    </None>
+    <None Include="resource\Include\HandleMgr.inl">
+      <Filter>resource</Filter>
+    </None>
+    <None Include="utility\Include\Publisher.inl">
+      <Filter>utility</Filter>
+    </None>
+    <None Include="utility\Include\Subscriber.inl">
+      <Filter>utility</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="stdafx.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="pong.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="utility\Include\StringHash.h">
+      <Filter>utility</Filter>
+    </ClInclude>
+    <ClInclude Include="gameObjects\Include\GameObjectSystem.h">
+      <Filter>gameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="gameObjects\Include\Component.h">
+      <Filter>gameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="gameObjects\Include\ObjectProperty.h">
+      <Filter>gameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="game\Include\background.h">
+      <Filter>game</Filter>
+    </ClInclude>
+    <ClInclude Include="utility\Include\dataTypes.h">
+      <Filter>utility</Filter>
+    </ClInclude>
+    <ClInclude Include="utility\Include\Singleton.h">
+      <Filter>utility</Filter>
+    </ClInclude>
+    <ClInclude Include="utility\Include\ObjectId.h">
+      <Filter>utility</Filter>
+    </ClInclude>
+    <ClInclude Include="utility\Include\Allocator.h">
+      <Filter>utility</Filter>
+    </ClInclude>
+    <ClInclude Include="graphics\Include\gfxGeometry.h">
+      <Filter>graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="memory\Include\hpha.h">
+      <Filter>memory</Filter>
+    </ClInclude>
+    <ClInclude Include="memory\Include\CustomMemory.h">
+      <Filter>memory</Filter>
+    </ClInclude>
+    <ClInclude Include="resource\Include\Handle.h">
+      <Filter>resource</Filter>
+    </ClInclude>
+    <ClInclude Include="resource\Include\HandleMgr.h">
+      <Filter>resource</Filter>
+    </ClInclude>
+    <ClInclude Include="graphics\Include\gfxTexture.h">
+      <Filter>graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="graphics\Include\graphicsComponent.h">
+      <Filter>graphics\DX</Filter>
+    </ClInclude>
+    <ClInclude Include="graphics\Include\textureManager.h">
+      <Filter>graphics\DX</Filter>
+    </ClInclude>
+    <ClInclude Include="physics\Include\physicsComponent.h">
+      <Filter>physics</Filter>
+    </ClInclude>
+    <ClInclude Include="physics\Include\physicsBody.h">
+      <Filter>physics</Filter>
+    </ClInclude>
+    <ClInclude Include="physics\Include\position.h">
+      <Filter>physics</Filter>
+    </ClInclude>
+    <ClInclude Include="physics\Include\motionState.h">
+      <Filter>physics</Filter>
+    </ClInclude>
+    <ClInclude Include="game\Include\bumper.h">
+      <Filter>game</Filter>
+    </ClInclude>
+    <ClInclude Include="graphics\Include\graphicsDebugger.h">
+      <Filter>graphics\DX</Filter>
+    </ClInclude>
+    <ClInclude Include="physics\Include\physicsGfxDebugger.h">
+      <Filter>physics</Filter>
+    </ClInclude>
+    <ClInclude Include="Input\Include\InputManager.h">
+      <Filter>input</Filter>
+    </ClInclude>
+    <ClInclude Include="Input\Include\KeyboardInputManager.h">
+      <Filter>input</Filter>
+    </ClInclude>
+    <ClInclude Include="Input\Include\PositionControllerComponent.h">
+      <Filter>input</Filter>
+    </ClInclude>
+    <ClInclude Include="utility\Include\PlayerId.h">
+      <Filter>utility</Filter>
+    </ClInclude>
+    <ClInclude Include="Input\Include\PositionControllerProperty.h">
+      <Filter>input</Filter>
+    </ClInclude>
+    <ClInclude Include="game\Include\ball.h">
+      <Filter>game</Filter>
+    </ClInclude>
+    <ClInclude Include="rules\Include\gameRulesComponent.h">
+      <Filter>rules</Filter>
+    </ClInclude>
+    <ClInclude Include="utility\Include\Publisher.h">
+      <Filter>utility</Filter>
+    </ClInclude>
+    <ClInclude Include="utility\Include\Subscriber.h">
+      <Filter>utility</Filter>
+    </ClInclude>
+    <ClInclude Include="utility\Include\Containers.h">
+      <Filter>utility</Filter>
+    </ClInclude>
+    <ClInclude Include="rules\Include\StartState.h">
+      <Filter>rules</Filter>
+    </ClInclude>
+    <ClInclude Include="rules\Include\EndState.h">
+      <Filter>rules</Filter>
+    </ClInclude>
+    <ClInclude Include="rules\Include\GameState.h">
+      <Filter>rules</Filter>
+    </ClInclude>
+    <ClInclude Include="rules\Include\PauseState.h">
+      <Filter>rules</Filter>
+    </ClInclude>
+    <ClInclude Include="utility\Include\FiniteStateMachine.h">
+      <Filter>utility\FMS</Filter>
+    </ClInclude>
+    <ClInclude Include="utility\Include\TransitionObserver.h">
+      <Filter>utility\FMS</Filter>
+    </ClInclude>
+    <ClInclude Include="utility\Include\FSMState.h">
+      <Filter>utility\FMS</Filter>
+    </ClInclude>
+    <ClInclude Include="sound\Include\AudioWrapper.h">
+      <Filter>sound</Filter>
+    </ClInclude>
+    <ClInclude Include="..\DXUT\Optional\SDKwavefile.h">
+      <Filter>sound</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="pong.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="gameObjects\Source\GameObjectSystem.cpp">
+      <Filter>gameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="game\Source\background.cpp">
+      <Filter>game</Filter>
+    </ClCompile>
+    <ClCompile Include="gameObjects\Source\ObjectProperty.cpp">
+      <Filter>gameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="gameObjects\Source\Component.cpp">
+      <Filter>gameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="graphics\Source\gfxGeometry.cpp">
+      <Filter>graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="memory\Source\hpha.cpp">
+      <Filter>memory</Filter>
+    </ClCompile>
+    <ClCompile Include="graphics\Source\gfxTexture.cpp">
+      <Filter>graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="graphics\Source\graphicsComponent.cpp">
+      <Filter>graphics\DX</Filter>
+    </ClCompile>
+    <ClCompile Include="graphics\Source\textureManager.cpp">
+      <Filter>graphics\DX</Filter>
+    </ClCompile>
+    <ClCompile Include="utility\Source\StringHash.cpp">
+      <Filter>utility</Filter>
+    </ClCompile>
+    <ClCompile Include="physics\Source\physicsComponent.cpp">
+      <Filter>physics</Filter>
+    </ClCompile>
+    <ClCompile Include="physics\Source\physicsBody.cpp">
+      <Filter>physics</Filter>
+    </ClCompile>
+    <ClCompile Include="physics\Source\position.cpp">
+      <Filter>physics</Filter>
+    </ClCompile>
+    <ClCompile Include="physics\Source\motionState.cpp">
+      <Filter>physics</Filter>
+    </ClCompile>
+    <ClCompile Include="utility\Source\dataTypes.cpp">
+      <Filter>utility</Filter>
+    </ClCompile>
+    <ClCompile Include="game\Source\bumper.cpp">
+      <Filter>game</Filter>
+    </ClCompile>
+    <ClCompile Include="graphics\Source\graphicsDebugger.cpp">
+      <Filter>graphics\DX</Filter>
+    </ClCompile>
+    <ClCompile Include="physics\Source\physicsGfxDebugger.cpp">
+      <Filter>physics</Filter>
+    </ClCompile>
+    <ClCompile Include="Input\Source\InputManager.cpp">
+      <Filter>input</Filter>
+    </ClCompile>
+    <ClCompile Include="Input\Source\KeyboardInputManager.cpp">
+      <Filter>input</Filter>
+    </ClCompile>
+    <ClCompile Include="Input\Source\PositionControllerComponent.cpp">
+      <Filter>input</Filter>
+    </ClCompile>
+    <ClCompile Include="Input\Source\PositionControllerProperty.cpp">
+      <Filter>input</Filter>
+    </ClCompile>
+    <ClCompile Include="game\Source\ball.cpp">
+      <Filter>game</Filter>
+    </ClCompile>
+    <ClCompile Include="rules\Source\gameRulesComponent.cpp">
+      <Filter>rules</Filter>
+    </ClCompile>
+    <ClCompile Include="rules\Source\StartState.cpp">
+      <Filter>rules</Filter>
+    </ClCompile>
+    <ClCompile Include="rules\Source\EndState.cpp">
+      <Filter>rules</Filter>
+    </ClCompile>
+    <ClCompile Include="rules\Source\GameState.cpp">
+      <Filter>rules</Filter>
+    </ClCompile>
+    <ClCompile Include="rules\Source\PauseState.cpp">
+      <Filter>rules</Filter>
+    </ClCompile>
+    <ClCompile Include="utility\Source\FiniteStateMachine.cpp">
+      <Filter>utility\FMS</Filter>
+    </ClCompile>
+    <ClCompile Include="utility\Source\TransitionObserver.cpp">
+      <Filter>utility\FMS</Filter>
+    </ClCompile>
+    <ClCompile Include="utility\Source\FSMState.cpp">
+      <Filter>utility\FMS</Filter>
+    </ClCompile>
+    <ClCompile Include="sound\Source\AudioWrapper.cpp">
+      <Filter>sound</Filter>
+    </ClCompile>
+    <ClCompile Include="..\DXUT\Optional\SDKwavefile.cpp">
+      <Filter>sound</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="pong.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+</Project>

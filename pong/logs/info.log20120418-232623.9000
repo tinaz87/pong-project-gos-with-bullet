@@ -1,0 +1,4 @@
+Log file created at: 2012/04/18 23:26:23
+Running on machine: G51
+Log line format: [IWEF]mmdd hh:mm:ss.uuuuuu threadid file:line] msg
+I0418 23:26:23.424839   296 pong.cpp:45] Found 2 cookies
