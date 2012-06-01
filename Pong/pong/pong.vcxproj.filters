@@ -213,6 +213,15 @@
     <ClInclude Include="..\DXUT\Optional\SDKwavefile.h">
       <Filter>sound</Filter>
     </ClInclude>
+    <ClInclude Include="physics\Include\collisionObserver.h">
+      <Filter>physics</Filter>
+    </ClInclude>
+    <ClInclude Include="ScoreManager.h">
+      <Filter>rules</Filter>
+    </ClInclude>
+    <ClInclude Include="ScoreObserver.h">
+      <Filter>rules</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -319,6 +328,15 @@
     </ClCompile>
     <ClCompile Include="..\DXUT\Optional\SDKwavefile.cpp">
       <Filter>sound</Filter>
+    </ClCompile>
+    <ClCompile Include="physics\Source\collisionObserver.cpp">
+      <Filter>physics</Filter>
+    </ClCompile>
+    <ClCompile Include="ScoreManager.cpp">
+      <Filter>rules</Filter>
+    </ClCompile>
+    <ClCompile Include="ScoreObserver.cpp">
+      <Filter>rules</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

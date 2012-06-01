@@ -17,7 +17,10 @@ const ObjectId& TransitionObserverData::getTransition() const
 }
 
 void TransitionObserver::TransitionEvent(const TransitionObserverData& data){
-
-
+	
+	if ( (data.getTransition()).GetHash() == StringHash("PauseState").GetHash() )
+	{
+		int a= 0;
+	}
 
 }

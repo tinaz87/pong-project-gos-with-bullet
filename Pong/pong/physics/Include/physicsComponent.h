@@ -1,6 +1,7 @@
 #pragma once
 #include "Component.h"
 #include "Publisher.h"
+#include "collisionObserver.h"
 
 class  btDefaultCollisionConfiguration;
 class  btCollisionDispatcher;
@@ -39,4 +40,6 @@ private:
 	CollisionShapeMap					m_collisionShapeMap;
 	BulletDebugger*						m_gfxDebugger;
 	static PhysicsComponent*			s_activePhysicsComponent;
+
+	Publisher<
 };

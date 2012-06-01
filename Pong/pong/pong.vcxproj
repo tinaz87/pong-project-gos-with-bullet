@@ -113,6 +113,7 @@
     <ClInclude Include="Input\Include\PositionControllerProperty.h" />
     <ClInclude Include="memory\Include\CustomMemory.h" />
     <ClInclude Include="memory\Include\hpha.h" />
+    <ClInclude Include="physics\Include\collisionObserver.h" />
     <ClInclude Include="physics\Include\motionState.h" />
     <ClInclude Include="physics\Include\physicsBody.h" />
     <ClInclude Include="physics\Include\physicsComponent.h" />
@@ -127,6 +128,8 @@
     <ClInclude Include="rules\Include\GameState.h" />
     <ClInclude Include="rules\Include\PauseState.h" />
     <ClInclude Include="rules\Include\StartState.h" />
+    <ClInclude Include="ScoreManager.h" />
+    <ClInclude Include="ScoreObserver.h" />
     <ClInclude Include="sound\Include\AudioWrapper.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
@@ -161,6 +164,7 @@
     <ClCompile Include="Input\Source\PositionControllerComponent.cpp" />
     <ClCompile Include="Input\Source\PositionControllerProperty.cpp" />
     <ClCompile Include="memory\Source\hpha.cpp" />
+    <ClCompile Include="physics\Source\collisionObserver.cpp" />
     <ClCompile Include="physics\Source\motionState.cpp" />
     <ClCompile Include="physics\Source\physicsBody.cpp" />
     <ClCompile Include="physics\Source\physicsComponent.cpp" />
@@ -172,6 +176,8 @@
     <ClCompile Include="rules\Source\GameState.cpp" />
     <ClCompile Include="rules\Source\PauseState.cpp" />
     <ClCompile Include="rules\Source\StartState.cpp" />
+    <ClCompile Include="ScoreManager.cpp" />
+    <ClCompile Include="ScoreObserver.cpp" />
     <ClCompile Include="sound\Source\AudioWrapper.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>

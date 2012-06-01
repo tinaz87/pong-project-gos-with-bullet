@@ -41,7 +41,7 @@ Ball::Ball(const std::string& ballId, const vector3& posOffset)
 	btSphereShape* sphereShape= MV_NEW btSphereShape(1.5f);
 	sphereShape->setMargin(0.3f);
 	PhysicsBody* ballBody= MV_NEW PhysicsBody(ballObjId, 10.f, sphereShape);
-	ballBody->setVelocity(vector3(100.f,0.f,0.f));
+	ballBody->setVelocity(vector3(.002f,0.f,0.f));
 
 	//Add the object
 	GameObjectSystem::GetSingleton().addProperty(ballBody);
