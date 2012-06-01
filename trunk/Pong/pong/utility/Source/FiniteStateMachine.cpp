@@ -52,8 +52,9 @@ void FiniteStateMachine::onFrame(real frametime, real timestep) // per evitare d
 
 void FiniteStateMachine::addState(FSMState* state)
 {
-	m_stateMap[state->getStateId()]= state;
 	m_transitionSubscriber.Subscribe(&state->getTransitionPublisher()); // Sottoscrivi un publisher di eventi
+	m_stateMap[state->getStateId()]= state;
+	
 }
 
 FiniteStateMachine::~FiniteStateMachine()

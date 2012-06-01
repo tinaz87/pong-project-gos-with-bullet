@@ -13,6 +13,7 @@ const ObjectId GameRulesComponent::START_STATE= ObjectId("StartState");
 const ObjectId GameRulesComponent::GAME_STATE= ObjectId("GameState");
 const ObjectId GameRulesComponent::END_STATE= ObjectId("EndState");
 const ObjectId GameRulesComponent::PAUSE_STATE= ObjectId("PauseState");
+const ObjectId GameRulesComponent::GOAL_SCORED= ObjectId("Goal");
 
 //transitions
 const ObjectId GameRulesComponent::KEY_START_PRESSED= ObjectId("StartKey");
@@ -24,12 +25,33 @@ GameRulesComponent::GameRulesComponent()
 	:Component(RULES_COMPONENT_ID, 3)
 	,FiniteStateMachine(START_STATE)
 {
+	m_subscribeScoreObserver.SetSubscriber(this);
 	m_keyPause= false;
 	configureFSM();
 }
 
 GameRulesComponent::~GameRulesComponent()
 {
+
+}
+
+
+void GameRulesComponent::ScoreEvent(const ScoreData& score){
+
+	ObjectId idTransition;
+	if ( score.getScoreA() < 3)
+		idTransition = GOAL_SCORED;
+	else
+		idTransition = START_STATE;	// Hai vinto ritorna allo stato di partenza 
+	if ( score.getScoreB() < 3)
+		idTransition = GOAL_SCORED;
+	else
+		idTransition = END_STATE;	// Hai perso 
+
+	TransitionObserverData data(idTransition);
+	
+
+	TransitionEvent(data);
 
 }
 
@@ -56,7 +78,9 @@ void GameRulesComponent::update(real frametime, real timestep)
 	{
 		FiniteStateMachine::updateState("");
 	}
+
 	FiniteStateMachine::onFrame(frametime, timestep);
+
 }
 
 void GameRulesComponent::configureFSM()
@@ -68,14 +92,17 @@ void GameRulesComponent::configureFSM()
 	game->addTransition(KEY_PAUSE_RELEASED, PAUSE_STATE);
 	game->addTransition(SCORE_REACHED, END_STATE);
 
-	PauseState* pause= MV_NEW PauseState(PAUSE_STATE);
+	PauseState* pause = MV_NEW PauseState(PAUSE_STATE);
 	pause->addTransition(KEY_PAUSE_RELEASED, GAME_STATE);
 
 	EndState* endState= MV_NEW EndState(END_STATE);
 	endState->addTransition(KEY_RESTART, START_STATE);
 
+	FiniteStateMachine::addState(pause);
 	FiniteStateMachine::addState(start);
 	FiniteStateMachine::addState(game);
-	FiniteStateMachine::addState(pause);
+
 	FiniteStateMachine::addState(endState);
+
+
 }
