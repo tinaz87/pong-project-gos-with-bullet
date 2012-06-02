@@ -5,6 +5,7 @@
 #include "PauseState.h"
 #include "EndState.h"
 #include "KeyboardInputManager.h"
+#include "ScoreManager.h"
 
 const StringHash GameRulesComponent::RULES_COMPONENT_ID= StringHash("Rules");
 
@@ -13,18 +14,20 @@ const ObjectId GameRulesComponent::START_STATE= ObjectId("StartState");
 const ObjectId GameRulesComponent::GAME_STATE= ObjectId("GameState");
 const ObjectId GameRulesComponent::END_STATE= ObjectId("EndState");
 const ObjectId GameRulesComponent::PAUSE_STATE= ObjectId("PauseState");
-const ObjectId GameRulesComponent::GOAL_SCORED= ObjectId("Goal");
+
 
 //transitions
 const ObjectId GameRulesComponent::KEY_START_PRESSED= ObjectId("StartKey");
 const ObjectId GameRulesComponent::KEY_PAUSE_RELEASED= ObjectId("PauseKey");
 const ObjectId GameRulesComponent::KEY_RESTART= ObjectId("RestartKey");
 const ObjectId GameRulesComponent::SCORE_REACHED= ObjectId("Score");
+const ObjectId GameRulesComponent::GOAL_SCORED= ObjectId("Goal");
 
 GameRulesComponent::GameRulesComponent()
 	:Component(RULES_COMPONENT_ID, 3)
 	,FiniteStateMachine(START_STATE)
 {
+	
 	m_subscribeScoreObserver.SetSubscriber(this);
 	m_keyPause= false;
 	configureFSM();
@@ -39,17 +42,13 @@ GameRulesComponent::~GameRulesComponent()
 void GameRulesComponent::ScoreEvent(const ScoreData& score){
 
 	ObjectId idTransition;
-	if ( score.getScoreA() < 3)
+	if ( score.getScoreA() < 3 && score.getScoreB() < 3)
 		idTransition = GOAL_SCORED;
 	else
-		idTransition = START_STATE;	// Hai vinto ritorna allo stato di partenza 
-	if ( score.getScoreB() < 3)
-		idTransition = GOAL_SCORED;
-	else
-		idTransition = END_STATE;	// Hai perso 
-
-	TransitionObserverData data(idTransition);
+		idTransition = END_STATE;	
 	
+
+	TransitionObserverData data(idTransition);	
 
 	TransitionEvent(data);
 
@@ -83,6 +82,12 @@ void GameRulesComponent::update(real frametime, real timestep)
 
 }
 
+void GameRulesComponent::setScorePublisher(ScoreManager* iScoremanager){
+
+	m_subscribeScoreObserver.Subscribe(&iScoremanager->getScorePublisher());
+
+}
+
 void GameRulesComponent::configureFSM()
 {
 	StartState* start= MV_NEW StartState(START_STATE);
@@ -91,6 +96,7 @@ void GameRulesComponent::configureFSM()
 	GameState* game= MV_NEW GameState(GAME_STATE);
 	game->addTransition(KEY_PAUSE_RELEASED, PAUSE_STATE);
 	game->addTransition(SCORE_REACHED, END_STATE);
+	game->addTransition(GOAL_SCORED,START_STATE);
 
 	PauseState* pause = MV_NEW PauseState(PAUSE_STATE);
 	pause->addTransition(KEY_PAUSE_RELEASED, GAME_STATE);

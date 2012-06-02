@@ -216,10 +216,10 @@
     <ClInclude Include="physics\Include\collisionObserver.h">
       <Filter>physics</Filter>
     </ClInclude>
-    <ClInclude Include="ScoreManager.h">
+    <ClInclude Include="rules\Include\ScoreManager.h">
       <Filter>rules</Filter>
     </ClInclude>
-    <ClInclude Include="ScoreObserver.h">
+    <ClInclude Include="rules\Include\ScoreObserver.h">
       <Filter>rules</Filter>
     </ClInclude>
   </ItemGroup>
@@ -332,10 +332,10 @@
     <ClCompile Include="physics\Source\collisionObserver.cpp">
       <Filter>physics</Filter>
     </ClCompile>
-    <ClCompile Include="ScoreManager.cpp">
+    <ClCompile Include="rules\Source\ScoreManager.cpp">
       <Filter>rules</Filter>
     </ClCompile>
-    <ClCompile Include="ScoreObserver.cpp">
+    <ClCompile Include="rules\Source\ScoreObserver.cpp">
       <Filter>rules</Filter>
     </ClCompile>
   </ItemGroup>

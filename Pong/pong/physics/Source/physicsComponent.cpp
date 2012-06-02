@@ -138,6 +138,18 @@ void PhysicsComponent::setGravityAcceleration(real gravityAcceleration)
 	m_world->setGravity(btVector3(0.f, -getGravityAcceleration(), 0.f));
 }
 
+Publisher<CollisionObserver>& PhysicsComponent::getCollisionPublisher(){
+
+	return m_collisionPublisher;
+}
+
+void PhysicsComponent::fireCollisionEvent(const ObjectId& idObjA,const ObjectId& idObjB){
+
+	CollisionData data(idObjA,idObjB);
+	m_collisionPublisher.RaiseEvent(&CollisionObserver::CollisionEvent,data);
+
+}
+
 void PhysicsComponent::internalTickCallback(btDynamicsWorld* world, real timeStep)
 {
 	DLOG_ASSERT(s_activePhysicsComponent != NULL);
@@ -149,9 +161,17 @@ void PhysicsComponent::internalTickHandler(btDynamicsWorld* world, real timeStep
 	const uint32 numManifolds= world->getDispatcher()->getNumManifolds();
 	for(uint32 manifoldIndex= 0; manifoldIndex < numManifolds; ++manifoldIndex)
 	{
+		const ObjectPropertyTable* opt = GameObjectSystem::GetSingleton().getProperties(PhysicsBody::PHY_BODY_ID);
+		
+		// TODO: SCHIFO!!!!! 
+		PhysicsBody* rBall = static_cast<PhysicsBody*>(opt->at(StringHash("ball1").GetHash()));
+		PhysicsBody* rBumper1 = static_cast<PhysicsBody*>(opt->at(StringHash("bump1").GetHash()));
+		PhysicsBody* rBumper2 = static_cast<PhysicsBody*>(opt->at(StringHash("bump2").GetHash()));
+
 		btPersistentManifold* manifold= world->getDispatcher()->getManifoldByIndexInternal(manifoldIndex);
 
 		const uint32 numContacts= manifold->getNumContacts();
+
 		btRigidBody* bodyA = static_cast<btRigidBody*>(manifold->getBody0());
 		btRigidBody* bodyB = static_cast<btRigidBody*>(manifold->getBody1());
 
@@ -161,7 +181,28 @@ void PhysicsComponent::internalTickHandler(btDynamicsWorld* world, real timeStep
 			real impulse= contactPoint.getAppliedImpulse();
 			if(impulse > 0.f)
 			{
-				int a=0;
+				if( bodyA == rBumper1->getBody() || bodyB == rBumper1->getBody()){
+
+					if ( bodyA == rBall->getBody() || bodyB == rBall->getBody())
+					{
+
+						fireCollisionEvent(rBall->getObjectId(),rBumper1->getObjectId());
+					}
+
+				}else{
+
+					if( bodyA == rBumper2->getBody() || bodyB == rBumper2->getBody()){
+
+						if ( bodyA == rBall->getBody() || bodyB == rBall->getBody())
+						{
+
+							fireCollisionEvent(rBall->getObjectId(),rBumper2->getObjectId());
+						}
+
+					}
+				}
+				//int a=0;
+				
 				//raise event
 			}
 //			contactPoint.m_localPointA.getX(), contactPoint.m_localPointA.getY(), contactPoint.m_localPointA.getZ()

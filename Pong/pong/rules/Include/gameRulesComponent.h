@@ -4,7 +4,7 @@
 #include "FiniteStateMachine.h"
 #include "ScoreObserver.h"
 
-class PauseState;
+class ScoreManager;
 
 class GameRulesComponent: public Component, public FiniteStateMachine, public ScoreObserver
 {
@@ -15,6 +15,8 @@ public:
 	virtual void update(real frametime, real timestep);
 
 	virtual void ScoreEvent(const ScoreData& score);
+
+	void setScorePublisher(ScoreManager* iScoremanager);
 
 private:
 

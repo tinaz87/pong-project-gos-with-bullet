@@ -15,6 +15,7 @@
 #include <strsafe.h>
 #include "CustomMemory.h"
 #include "graphicsDebugger.h"
+#include "ScoreManager.h"
 
 #define MAX_LOADSTRING 100
 
@@ -40,6 +41,7 @@ void InitGlog()
 	google::SetLogDestination(google::GLOG_WARNING, "./logs/warning.log");
 	google::SetLogDestination(google::GLOG_FATAL,	"./logs/fatal.log");
 	google::SetStderrLogging(google::GLOG_WARNING);
+
 	google::InitGoogleLogging("");
 }
 
@@ -195,6 +197,14 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
    GraphicsComponent* graphicsComponent= MV_NEW GraphicsComponent(hWnd);
    GameRulesComponent* gameRulesComponent= MV_NEW GameRulesComponent();
  
+
+   ScoreManager* scoreManager = MV_NEW ScoreManager( "ball1","bump1","bump2");  // TODO: Farlo Component?
+
+
+   scoreManager->setCollisionPublisher(physicsComponent);
+   gameRulesComponent->setScorePublisher(scoreManager);
+   
+
    GameObjectSystem::GetSingleton().addComponent(positionControllerComponent);
    GameObjectSystem::GetSingleton().addComponent(physicsComponent);
    GameObjectSystem::GetSingleton().addComponent(graphicsComponent);
