@@ -26,6 +26,10 @@ public:
 	real getGravityAcceleration() const;
 	void setGravityAcceleration(real gravityAcceleration);
 
+	void fireCollisionEvent(const ObjectId& idObjA,const ObjectId& idObjB);
+
+	Publisher<CollisionObserver>& getCollisionPublisher();
+
 private:
 	void								AddGfxDebug();
 	void								AddRegisteredPhysicsObjects();
@@ -41,5 +45,5 @@ private:
 	BulletDebugger*						m_gfxDebugger;
 	static PhysicsComponent*			s_activePhysicsComponent;
 
-	Publisher<
+	Publisher<CollisionObserver>	m_collisionPublisher;
 };

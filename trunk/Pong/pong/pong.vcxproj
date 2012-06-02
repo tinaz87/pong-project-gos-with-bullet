@@ -127,9 +127,9 @@
     <ClInclude Include="rules\Include\gameRulesComponent.h" />
     <ClInclude Include="rules\Include\GameState.h" />
     <ClInclude Include="rules\Include\PauseState.h" />
+    <ClInclude Include="rules\Include\ScoreManager.h" />
+    <ClInclude Include="rules\Include\ScoreObserver.h" />
     <ClInclude Include="rules\Include\StartState.h" />
-    <ClInclude Include="ScoreManager.h" />
-    <ClInclude Include="ScoreObserver.h" />
     <ClInclude Include="sound\Include\AudioWrapper.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
@@ -175,9 +175,9 @@
     <ClCompile Include="rules\Source\gameRulesComponent.cpp" />
     <ClCompile Include="rules\Source\GameState.cpp" />
     <ClCompile Include="rules\Source\PauseState.cpp" />
+    <ClCompile Include="rules\Source\ScoreManager.cpp" />
+    <ClCompile Include="rules\Source\ScoreObserver.cpp" />
     <ClCompile Include="rules\Source\StartState.cpp" />
-    <ClCompile Include="ScoreManager.cpp" />
-    <ClCompile Include="ScoreObserver.cpp" />
     <ClCompile Include="sound\Source\AudioWrapper.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>

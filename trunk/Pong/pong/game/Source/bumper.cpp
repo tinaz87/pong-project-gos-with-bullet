@@ -2,13 +2,13 @@
 #include "gfxGeometry.h"
 #include "gfxTexture.h"
 #include "position.h"
-#include "GameObjectSystem.h"
 #include "physicsBody.h"
 #include "BulletCollision/CollisionShapes/btBoxShape.h"
+#include "GameObjectSystem.h"
 
 Bumper::Bumper(const std::string& bumperId, const vector3& posOffset, bool setKinematic)
 {
-	ObjectId bumperObjId= ObjectId(bumperId.c_str());
+	ObjectId bumperObjId = ObjectId(bumperId.c_str()); //TODO: Schifo.... per adesso ok... Metti a posto
 	//Create geometry and texture
 	GfxGeometry* geometry= MV_NEW GfxGeometry(bumperObjId);
 	vector4 vertices[]={{-3.0f, 15.0f, 0.5f, 1.f}, 
