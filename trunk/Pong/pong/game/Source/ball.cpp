@@ -8,7 +8,7 @@
 
 Ball::Ball(const std::string& ballId, const vector3& posOffset)
 {
-	ObjectId ballObjId=  ObjectId(ballId.c_str()); // TODO: Schifo!! .... correggi
+	ObjectId ballObjId=  ObjectId(ballId.c_str()); 
 	//Create geometry and texture
 	GfxGeometry* geometry= MV_NEW GfxGeometry(ballObjId);
 	vector4 vertices[]={{-1.5f, 1.5f, 0.5f, 1.f}, 

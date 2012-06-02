@@ -161,12 +161,6 @@ void PhysicsComponent::internalTickHandler(btDynamicsWorld* world, real timeStep
 	const uint32 numManifolds= world->getDispatcher()->getNumManifolds();
 	for(uint32 manifoldIndex= 0; manifoldIndex < numManifolds; ++manifoldIndex)
 	{
-		const ObjectPropertyTable* opt = GameObjectSystem::GetSingleton().getProperties(PhysicsBody::PHY_BODY_ID);
-		
-		// TODO: SCHIFO!!!!! 
-		PhysicsBody* rBall = static_cast<PhysicsBody*>(opt->at(StringHash("ball1").GetHash()));
-		PhysicsBody* rBumper1 = static_cast<PhysicsBody*>(opt->at(StringHash("bump1").GetHash()));
-		PhysicsBody* rBumper2 = static_cast<PhysicsBody*>(opt->at(StringHash("bump2").GetHash()));
 
 		btPersistentManifold* manifold= world->getDispatcher()->getManifoldByIndexInternal(manifoldIndex);
 
@@ -175,33 +169,16 @@ void PhysicsComponent::internalTickHandler(btDynamicsWorld* world, real timeStep
 		btRigidBody* bodyA = static_cast<btRigidBody*>(manifold->getBody0());
 		btRigidBody* bodyB = static_cast<btRigidBody*>(manifold->getBody1());
 
+		ObjectId* idBodyA = static_cast<ObjectId*>(bodyA->getUserPointer());
+		ObjectId* idBodyB = static_cast<ObjectId*>(bodyB->getUserPointer());
+
 		for(uint32 contactIndex= 0; contactIndex < numContacts; ++contactIndex)
 		{
 			const btManifoldPoint& contactPoint= manifold->getContactPoint(contactIndex);
 			real impulse= contactPoint.getAppliedImpulse();
 			if(impulse > 0.f)
 			{
-				if( bodyA == rBumper1->getBody() || bodyB == rBumper1->getBody()){
-
-					if ( bodyA == rBall->getBody() || bodyB == rBall->getBody())
-					{
-
-						fireCollisionEvent(rBall->getObjectId(),rBumper1->getObjectId());
-					}
-
-				}else{
-
-					if( bodyA == rBumper2->getBody() || bodyB == rBumper2->getBody()){
-
-						if ( bodyA == rBall->getBody() || bodyB == rBall->getBody())
-						{
-
-							fireCollisionEvent(rBall->getObjectId(),rBumper2->getObjectId());
-						}
-
-					}
-				}
-				//int a=0;
+				fireCollisionEvent(*idBodyA,*idBodyB);
 				
 				//raise event
 			}

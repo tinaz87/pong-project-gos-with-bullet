@@ -58,6 +58,7 @@ int APIENTRY _tWinMain(HINSTANCE hInstance,
 	InitGlog();
 	GameObjectSystem::CreateInstance(10 /*maxObjectsCount*/, 4 /*maxPhaseCount*/);
 	KeyboardInputManager::CreateInstance();
+	
 
 	MSG msg;
 	ZeroMemory( &msg, sizeof( msg ) );
@@ -108,6 +109,7 @@ int APIENTRY _tWinMain(HINSTANCE hInstance,
 	}
 	GameObjectSystem::Release();
 	KeyboardInputManager::Release();
+	ScoreManager::Release();
 #ifdef _DEBUG
 	StringHash::clearDebug();
 #endif
@@ -186,6 +188,8 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 
    Ball ball("ball1", vector3(0.f, 0.f, 0.5f));
 
+   ScoreManager::CreateInstance(ObjectId("ball1"),ObjectId("bump1"),ObjectId("bump2"));
+
 #ifdef _DEBUG
    GraphicsDebugger* gfxDebugger= MV_NEW GraphicsDebugger();
    GameObjectSystem::GetSingleton().addProperty(gfxDebugger);
@@ -196,13 +200,11 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
    PhysicsComponent* physicsComponent= MV_NEW PhysicsComponent(1<<16, 1<<16);
    GraphicsComponent* graphicsComponent= MV_NEW GraphicsComponent(hWnd);
    GameRulesComponent* gameRulesComponent= MV_NEW GameRulesComponent();
- 
-
-   ScoreManager* scoreManager = MV_NEW ScoreManager( "ball1","bump1","bump2");  // TODO: Farlo Component?
 
 
-   scoreManager->setCollisionPublisher(physicsComponent);
-   gameRulesComponent->setScorePublisher(scoreManager);
+
+   ScoreManager::GetSingleton().setCollisionPublisher(physicsComponent);
+   gameRulesComponent->setScorePublisher(ScoreManager::GetSingletonPtr());
    
 
    GameObjectSystem::GetSingleton().addComponent(positionControllerComponent);
