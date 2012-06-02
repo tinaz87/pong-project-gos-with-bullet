@@ -1,5 +1,6 @@
 #pragma once
 #include "ObjectProperty.h"
+#include "BulletDynamics/Dynamics/btRigidBody.h"
 
 class btRigidBody;
 class btCollisionShape;

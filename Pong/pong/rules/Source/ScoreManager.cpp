@@ -2,14 +2,29 @@
 #include "GameObjectSystem.h"
 #include "position.h"
 
-ScoreManager::ScoreManager(const std::string& ballId,
-						   const std::string& bumperIdLeft,
-						   const std::string& bumperIdRight):scoreLeftPlayer(0),scoreRightPlayer(0),objectID_BALL(ObjectId(ballId.c_str())),
-						   objectID_LEFTWALL(ObjectId(bumperIdLeft.c_str())),objectID_RIGHTWALL(ObjectId(bumperIdRight.c_str()))
+ScoreManager::ScoreManager(const ObjectId ball,const ObjectId leftWall
+							,const ObjectId rightWall):scoreLeftPlayer(0),scoreRightPlayer(0)
 {	
+	
+	objectID_BALL = ball;
+	objectID_LEFTWALL = leftWall;
+	objectID_RIGHTWALL = rightWall;
 	m_collisionSubscriber.SetSubscriber(this);
 }
 
+ScoreManager::~ScoreManager(){}
+
+void ScoreManager::CreateInstance(const ObjectId ball,const ObjectId leftWall,const ObjectId rightWall){
+
+	if(GetSingletonPtr() == NULL)
+		MV_NEW ScoreManager(ball,leftWall,rightWall);
+}
+
+void ScoreManager::reset(){
+
+	scoreLeftPlayer = 0;
+	scoreRightPlayer = 0;
+}
 
 void ScoreManager::fireScore(const unsigned int iscoreA,const unsigned int iscoreB){
 	

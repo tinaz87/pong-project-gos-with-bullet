@@ -60,7 +60,7 @@ GraphicsComponent::GraphicsComponent(HWND hWnd)
 
 	m_textureManager= MV_NEW TextureMgr(m_pd3dDevice);
 	GameObjectSystem& gameObjectSystem= GameObjectSystem::GetSingleton();
-	const ObjectPropertyTable* gfxGeometryMap=  gameObjectSystem.getProperties(GfxGeometry::GFX_GEOMETRY_ID);
+	const ObjectPropertyTable* gfxGeometryMap =  gameObjectSystem.getProperties(GfxGeometry::GFX_GEOMETRY_ID);
 	if(gfxGeometryMap!=NULL)
 	{
 		for(ObjectPropertyTable::const_iterator opIt= gfxGeometryMap->begin(); opIt != gfxGeometryMap->end(); ++opIt)

@@ -1,6 +1,6 @@
 #include "physicsBody.h"
 #include "BulletCollision/CollisionShapes/btCollisionShape.h"
-#include "BulletDynamics/Dynamics/btRigidBody.h"
+
 #include "glog/logging.h"
 #include "GameObjectSystem.h"
 #include "position.h"
@@ -48,6 +48,12 @@ PhysicsBody::PhysicsBody(const ObjectId& objectId,
 		m_body->setCcdMotionThreshold(150.f);
 		m_body->setCcdSweptSphereRadius(0.2f);
 	}
+
+	StringHash a;
+
+	
+	m_body->btCollisionObject::setUserPointer(const_cast<void*>(static_cast< const void*>(&(ObjectProperty::getObjectId()))));
+
 	reset();
 }
 
