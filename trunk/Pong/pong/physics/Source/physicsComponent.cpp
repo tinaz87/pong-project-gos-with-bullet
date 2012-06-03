@@ -1,6 +1,5 @@
 #include "physicsComponent.h"
 #include "BulletCollision/CollisionDispatch/btDefaultCollisionConfiguration.h"
-#include <BulletDynamics/Dynamics/btDiscreteDynamicsWorld.h>
 #include <BulletDynamics/ConstraintSolver/btSequentialImpulseConstraintSolver.h>
 #include <BulletCollision/BroadphaseCollision/btDbvtBroadphase.h>
 #include "GameObjectSystem.h"
@@ -180,14 +179,6 @@ void PhysicsComponent::internalTickHandler(btDynamicsWorld* world, real timeStep
 			{
 				fireCollisionEvent(*idBodyA,*idBodyB);
 
-				//bodyA->
-				/*if (*idBodyA == ObjectId("ball1"))
-					bodyA->setLinearVelocity( (bodyA->getLinearVelocity())*2.0f );
-				else{
-					if (*idBodyB == ObjectId("ball1"))
-						bodyB->applyCentralForce(btVector3(500,0,50));
-					//bodyB->
-				}*/
 				//raise event
 			}
 //			contactPoint.m_localPointA.getX(), contactPoint.m_localPointA.getY(), contactPoint.m_localPointA.getZ()

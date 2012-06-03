@@ -8,5 +8,4 @@ EndState::EndState(const ObjectId& stateId)
 
 void EndState::onEnter()
 {
-	
 }

@@ -45,7 +45,7 @@ void GameRulesComponent::ScoreEvent(const ScoreData& score){
 	if ( score.getScoreA() < 3 && score.getScoreB() < 3)
 		idTransition = GOAL_SCORED;
 	else
-		idTransition = END_STATE;	
+		idTransition = SCORE_REACHED;	
 	
 
 	TransitionObserverData data(idTransition);	

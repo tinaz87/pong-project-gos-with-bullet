@@ -3,10 +3,12 @@
 #include "GameObjectSystem.h"
 #include "glog/logging.h"
 
+real GameState::m_speed = 100;
+
 GameState::GameState(const ObjectId& stateId)
 	:FSMState(stateId)
 	,m_ballBody(NULL)
-	,m_speed(100.f)
+	
 {
 	ObjectProperty* property= GameObjectSystem::GetSingleton().editProperty(PhysicsBody::PHY_BODY_ID, "ball1");
 	if(property != NULL)
@@ -18,5 +20,11 @@ GameState::GameState(const ObjectId& stateId)
 
 void GameState::onFrame(real frametime, real timestep)
 {
-	m_ballBody->setSpeed(m_speed);
+	m_ballBody->setSpeed(m_speed += (frametime*2.0f));
+}
+
+
+void GameState::setSpeed(real ispeed){
+
+	m_speed = ispeed;
 }

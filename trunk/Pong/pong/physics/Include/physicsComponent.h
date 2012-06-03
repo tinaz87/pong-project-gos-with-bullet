@@ -2,17 +2,19 @@
 #include "Component.h"
 #include "Publisher.h"
 #include "collisionObserver.h"
+#include <BulletDynamics/Dynamics/btDiscreteDynamicsWorld.h>
 
 class  btDefaultCollisionConfiguration;
 class  btCollisionDispatcher;
 struct btDbvtBroadphase;
 class  btSequentialImpulseConstraintSolver;
 class  btDiscreteDynamicsWorld;
-class  btDynamicsWorld;
 class  btCollisionShape;
 typedef MvHashMap<uint32, btCollisionShape*> CollisionShapeMap;
 class BulletDebugger;
 class btRigidBody;
+
+
 class PhysicsComponent: public Component
 {
 public:
@@ -30,10 +32,9 @@ public:
 
 	Publisher<CollisionObserver>& getCollisionPublisher();
 
-	inline void reset(btRigidBody* bodyA){
-		
-		
+	btDiscreteDynamicsWorld* getWorld(){
 
+		return m_world;
 	}
 
 private:
