@@ -102,7 +102,9 @@ int APIENTRY _tWinMain(HINSTANCE hInstance,
 		{
 			QueryPerformanceCounter(&newTime);
 			frametime= (newTime.QuadPart - currentTime.QuadPart) * freq; //sec
-			LOG_EVERY_N(INFO, 60) << "fps" << 1.f/frametime;
+			
+			//LOG_EVERY_N(INFO, 60) << "fps" << 1.f/frametime;
+			
 			currentTime= newTime;
 			GameObjectSystem::GetSingleton().update(frametime, TIMESTEP);
 		}
@@ -188,7 +190,7 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 
    Ball ball("ball1", vector3(0.f, 0.f, 0.5f));
 
-   ScoreManager::CreateInstance(ObjectId("ball1"),ObjectId("bump1"),ObjectId("bump2"));
+   ScoreManager::CreateInstance(ObjectId("ball1"),ObjectId("wall2"),ObjectId("wall1"));
 
 #ifdef _DEBUG
    GraphicsDebugger* gfxDebugger= MV_NEW GraphicsDebugger();

@@ -179,7 +179,15 @@ void PhysicsComponent::internalTickHandler(btDynamicsWorld* world, real timeStep
 			if(impulse > 0.f)
 			{
 				fireCollisionEvent(*idBodyA,*idBodyB);
-				
+
+				//bodyA->
+				/*if (*idBodyA == ObjectId("ball1"))
+					bodyA->setLinearVelocity( (bodyA->getLinearVelocity())*2.0f );
+				else{
+					if (*idBodyB == ObjectId("ball1"))
+						bodyB->applyCentralForce(btVector3(500,0,50));
+					//bodyB->
+				}*/
 				//raise event
 			}
 //			contactPoint.m_localPointA.getX(), contactPoint.m_localPointA.getY(), contactPoint.m_localPointA.getZ()

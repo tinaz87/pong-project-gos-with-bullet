@@ -12,7 +12,7 @@ class  btDynamicsWorld;
 class  btCollisionShape;
 typedef MvHashMap<uint32, btCollisionShape*> CollisionShapeMap;
 class BulletDebugger;
-
+class btRigidBody;
 class PhysicsComponent: public Component
 {
 public:
@@ -29,6 +29,12 @@ public:
 	void fireCollisionEvent(const ObjectId& idObjA,const ObjectId& idObjB);
 
 	Publisher<CollisionObserver>& getCollisionPublisher();
+
+	inline void reset(btRigidBody* bodyA){
+		
+		
+
+	}
 
 private:
 	void								AddGfxDebug();

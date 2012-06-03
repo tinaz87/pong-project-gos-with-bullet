@@ -1,7 +1,7 @@
 #include "ScoreManager.h"
 #include "GameObjectSystem.h"
 #include "position.h"
-
+#include <glog/logging.h>
 ScoreManager::ScoreManager(const ObjectId ball,const ObjectId leftWall
 							,const ObjectId rightWall):scoreLeftPlayer(0),scoreRightPlayer(0)
 {	
@@ -55,8 +55,10 @@ void ScoreManager::checkCollision(const ObjectId& idCollisionA,const ObjectId& i
 		if (idCollisionA == objectID_BALL || idCollisionB == objectID_BALL)
 		{
 
-			DLOG(INFO) << "Collision Ball ( " << objectID_BALL.GetHash() <<" ) "<< " - LeftBumper ( " << objectID_LEFTWALL.GetHash()<<" )";
-			++scoreLeftPlayer; 
+			DLOG(INFO) << "Collision Ball ( " << objectID_BALL.GetHash() <<" ) "<< " - LeftWall ( " << objectID_LEFTWALL.GetHash()<<" )";
+			++scoreRightPlayer;
+
+			fireScore(scoreLeftPlayer,scoreRightPlayer);
 			
 		}
 
@@ -67,13 +69,13 @@ void ScoreManager::checkCollision(const ObjectId& idCollisionA,const ObjectId& i
 			if (idCollisionA == objectID_BALL || idCollisionB == objectID_BALL)
 			{
 
-				DLOG(INFO) << "Collision Ball ( " << objectID_BALL.GetHash() <<" ) "<< " - RightBumper ( " << objectID_RIGHTWALL.GetHash()<<" )";
-				++scoreRightPlayer;
+				DLOG(INFO) << "Collision Ball ( " << objectID_BALL.GetHash() <<" ) "<< " - RightWall ( " << objectID_RIGHTWALL.GetHash()<<" )";
+				++scoreLeftPlayer;
+
+				fireScore(scoreLeftPlayer,scoreRightPlayer);
 			}
 		}
 	}
-
-	fireScore(scoreLeftPlayer,scoreRightPlayer);
 
 	return;
 
