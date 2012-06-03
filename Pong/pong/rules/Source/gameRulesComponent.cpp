@@ -7,6 +7,9 @@
 #include "KeyboardInputManager.h"
 #include "ScoreManager.h"
 
+#define POINTS 10
+
+
 const StringHash GameRulesComponent::RULES_COMPONENT_ID= StringHash("Rules");
 
 //States
@@ -42,11 +45,10 @@ GameRulesComponent::~GameRulesComponent()
 void GameRulesComponent::ScoreEvent(const ScoreData& score){
 
 	ObjectId idTransition;
-	if ( score.getScoreA() < 3 && score.getScoreB() < 3)
+	if ( score.getScoreA() < POINTS && score.getScoreB() < POINTS )
 		idTransition = GOAL_SCORED;
 	else
-		idTransition = SCORE_REACHED;	
-	
+		idTransition = SCORE_REACHED;
 
 	TransitionObserverData data(idTransition);	
 
@@ -107,7 +109,6 @@ void GameRulesComponent::configureFSM()
 	FiniteStateMachine::addState(pause);
 	FiniteStateMachine::addState(start);
 	FiniteStateMachine::addState(game);
-
 	FiniteStateMachine::addState(endState);
 
 
