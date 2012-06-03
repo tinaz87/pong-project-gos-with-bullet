@@ -12,7 +12,11 @@ public:
 	virtual void onEnter() {}
 	virtual void onLeave() {}
 	virtual void onFrame(real frametime, real timestep);
+
+	static void setSpeed(real ispeed);
+
 private:
-	PhysicsBody* m_ballBody;
-	real		 m_speed;
+
+	PhysicsBody*	 m_ballBody;
+	static real		 m_speed;
 };
