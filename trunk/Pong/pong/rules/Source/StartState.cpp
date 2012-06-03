@@ -16,21 +16,23 @@ void StartState::onEnter()
 {
 
 	GameObjectSystem& gameobject = GameObjectSystem::GetSingleton();
-	
-	/*const ObjectPropertyTable* opt = gameobject.getProperties(Position::POSITION_ID);
-
-	Position* position = static_cast<Position*>(opt->at(StringHash("ball1").GetHash()));*/
 
 	PhysicsBody* phyBody = static_cast<PhysicsBody*>(gameobject.editProperty(PhysicsBody::PHY_BODY_ID,ObjectId("ball1")));
 
-	btRigidBody* rib = phyBody->editBody();
+	btRigidBody* ballBody = phyBody->editBody();
 
-	(rib->getWorldTransform()).setOrigin(btVector3(0.f, 0.f, 0.5f));
 
-	//quaternion initRotation= QuaternionFromRotationMatrix(MAT_IDENTITY);
-	//matrix matPos= MatrixPosition(vector3(0.f, 0.f, 0.5f), initRotation);
-	//position->setPosition(matPos);
+	// Reset ball position 
+	if (rand()%2==0)
+	{
+		//ballBody->setLinearVelocity(btVector3(100,0,10));
+	}else
+		//ballBody->setLinearVelocity(btVector3(-100,0,-10));
+	
+	ballBody->setAngularVelocity(btVector3(0,0,0));
 
+	ballBody->setInterpolationWorldTransform(btTransform(btMatrix3x3::getIdentity(),btVector3(0,0.f,0.5f)));
+	ballBody->setCenterOfMassTransform(btTransform(btMatrix3x3::getIdentity(),btVector3(0,0.f,0.5f)));
 
 	Component* cmp = gameobject.editComponent(PhysicsComponent::PHYSICS_COMPONENT_ID);
 
