@@ -62,10 +62,6 @@ void StartState::onLeave()
 	cmp = gameobject.editComponent(PositionControllerComponent::POSITION_CONTROLLER_ID);
 
 	cmp->SetActiveStatus(true);
-		
-	// reset speed in gameState
-	GameState::setSpeed(100);
-
 
 
 }
