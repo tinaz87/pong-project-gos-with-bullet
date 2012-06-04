@@ -1,10 +1,10 @@
 #include "glog/logging.h"
 #include "Publisher.h"
-#include <algorithm>
 
 template<class SubscriberImpl> 
 SubscriberHelper<SubscriberImpl>::SubscriberHelper(SubscriberImpl* subscriberImpl)
-	: m_subscriberImpl(subscriberImpl)//,m_publisher()
+	: m_publisher(NULL)
+	, m_subscriberImpl(subscriberImpl)
 {
 }
 
@@ -19,16 +19,14 @@ inline void SubscriberHelper<SubscriberImpl>::Subscribe(Publisher<SubscriberImpl
 {
 	DLOG_ASSERT(m_subscriberImpl);
 
-	Publisher<SubscriberImpl*> findPublisher = *(find(PublisherIterator.begin(),PublisherIterator.end(),publisher));
-
-	if (m_subscriberImpl && findPublisher != PublisherIterator->end())//m_publisher != publisher)
+	if (m_subscriberImpl && m_publisher != publisher)
 	{
-		//Unsubscribe();
-		m_publisher.push_back(publisher);
+		Unsubscribe();
+		m_publisher = publisher;
 
-		if (publisher)
+		if (m_publisher)
 		{
-			publisher->Subscribe(this);
+			m_publisher->Subscribe(this);
 		}
 	}
 }
@@ -36,19 +34,10 @@ inline void SubscriberHelper<SubscriberImpl>::Subscribe(Publisher<SubscriberImpl
 template<class SubscriberImpl>
 inline void SubscriberHelper<SubscriberImpl>::Unsubscribe() 
 {
-	for(PublisherIterator it = PublisherIterator.begin();it!=PublisherIterator.end();++it){
-
-		/*	if (m_publisher)
-		{
+	if (m_publisher)
+	{
 		m_publisher->Unsubscribe(this);
 		m_publisher = NULL;
-		}*/
-
-		if (*it)
-		{
-			(*it)->Unsubscribe(this);
-			m_publisher.erase(it);
-		}
 	}
 }
 
