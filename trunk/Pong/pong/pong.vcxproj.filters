@@ -222,6 +222,9 @@
     <ClInclude Include="rules\Include\ScoreObserver.h">
       <Filter>rules</Filter>
     </ClInclude>
+    <ClInclude Include="graphics\Include\interfaceComponent.h">
+      <Filter>graphics\DX</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -337,6 +340,9 @@
     </ClCompile>
     <ClCompile Include="rules\Source\ScoreObserver.cpp">
       <Filter>rules</Filter>
+    </ClCompile>
+    <ClCompile Include="graphics\Source\interfaceComponent.cpp">
+      <Filter>graphics\DX</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

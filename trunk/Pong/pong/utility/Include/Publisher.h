@@ -16,6 +16,7 @@ public:
 
 private:
 	friend class		SubscriberHelper<SubscriberImpl>;
+
 	typedef MvVector<SubscriberHelper<SubscriberImpl>*>	SubscribersVector;
 	typedef typename SubscribersVector::iterator	SubscriberIterator;
 
