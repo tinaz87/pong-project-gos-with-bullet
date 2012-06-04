@@ -9,6 +9,7 @@
 #include "bumper.h"
 #include "ball.h"
 #include "graphicsComponent.h"
+#include "interfaceComponent.h"
 #include "physicsComponent.h"
 #include "gameRulesComponent.h"
 #include "PositionControllerComponent.h"
@@ -103,7 +104,7 @@ int APIENTRY _tWinMain(HINSTANCE hInstance,
 			QueryPerformanceCounter(&newTime);
 			frametime= (newTime.QuadPart - currentTime.QuadPart) * freq; //sec
 			
-			//LOG_EVERY_N(INFO, 60) << "fps" << 1.f/frametime;
+			LOG_EVERY_N(INFO, 60) << "fps" << 1.f/frametime;
 			
 			currentTime= newTime;
 			GameObjectSystem::GetSingleton().update(frametime, TIMESTEP);
@@ -201,17 +202,19 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
    PositionControllerComponent* positionControllerComponent= MV_NEW PositionControllerComponent();
    PhysicsComponent* physicsComponent= MV_NEW PhysicsComponent(1<<16, 1<<16);
    GraphicsComponent* graphicsComponent= MV_NEW GraphicsComponent(hWnd);
+   InterfaceComponent* interfaceComponent = MV_NEW InterfaceComponent();
    GameRulesComponent* gameRulesComponent= MV_NEW GameRulesComponent();
 
 
 
    ScoreManager::GetSingleton().setCollisionPublisher(physicsComponent);
    gameRulesComponent->setScorePublisher(ScoreManager::GetSingletonPtr());
-   
+   interfaceComponent->setScorePublisher(ScoreManager::GetSingletonPtr());
 
    GameObjectSystem::GetSingleton().addComponent(positionControllerComponent);
    GameObjectSystem::GetSingleton().addComponent(physicsComponent);
    GameObjectSystem::GetSingleton().addComponent(graphicsComponent);
+   GameObjectSystem::GetSingleton().addComponent(interfaceComponent);
    GameObjectSystem::GetSingleton().addComponent(gameRulesComponent);
    // Initialize Direct3D
    //create graphics component here

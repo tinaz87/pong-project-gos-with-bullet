@@ -33,6 +33,7 @@ GraphicsComponent::GraphicsComponent(HWND hWnd)
 	d3dpp.BackBufferFormat= D3DFMT_UNKNOWN;
 	d3dpp.PresentationInterval= D3DPRESENT_INTERVAL_DEFAULT;
 
+	
 	//ZBuffer 1 Setting the Appropriate Presentation Parameters
 	d3dpp.EnableAutoDepthStencil = TRUE;
 	d3dpp.AutoDepthStencilFormat = D3DFMT_D16;
@@ -61,6 +62,7 @@ GraphicsComponent::GraphicsComponent(HWND hWnd)
 	m_textureManager= MV_NEW TextureMgr(m_pd3dDevice);
 	GameObjectSystem& gameObjectSystem= GameObjectSystem::GetSingleton();
 	const ObjectPropertyTable* gfxGeometryMap =  gameObjectSystem.getProperties(GfxGeometry::GFX_GEOMETRY_ID);
+
 	if(gfxGeometryMap!=NULL)
 	{
 		for(ObjectPropertyTable::const_iterator opIt= gfxGeometryMap->begin(); opIt != gfxGeometryMap->end(); ++opIt)
@@ -229,12 +231,14 @@ void GraphicsComponent::update(real frametime, real timestep)
 												primitiveCount);	//primitive count
 		}
 		
+
+
  		// End the scene
  		m_pd3dDevice->EndScene();
  	}
  
  	// Present the backbuffer contents to the display
- 	m_pd3dDevice->Present( NULL, NULL, NULL, NULL );
+ 	//m_pd3dDevice->Present( NULL, NULL, NULL, NULL );
 }
 
 void GraphicsComponent::setPosition(const Position* position)
@@ -286,4 +290,10 @@ void GraphicsComponent::setupCamera()
   	D3DXMATRIXA16 matProj;
 	D3DXMatrixOrthoLH(&matProj, 200.f, 200.f, 1.f, 560.f); //Zn and Zf in camera space
   	m_pd3dDevice->SetTransform( D3DTS_PROJECTION, &matProj );
+}
+
+
+
+LPDIRECT3DDEVICE9 GraphicsComponent::getDevice(){
+	return m_pd3dDevice;
 }

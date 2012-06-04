@@ -15,10 +15,12 @@ public:
 	GraphicsComponent(HWND hWnd);
 	~GraphicsComponent();
 	virtual void update(real frametime, real timestep);
+	LPDIRECT3DDEVICE9 getDevice();
 
 private:
 	void setupCamera();
 	void setPosition(const Position*);
+
 
 	// Directx Global Variables
 	LPDIRECT3D9              m_pD3D;					// Used to create the D3DDevice
@@ -31,4 +33,5 @@ private:
 	MvVector<const Position*>m_position;
 	TextureMgr*				 m_textureManager;
 	const GraphicsDebugger*	 m_graphicsDebugger;
+
 };
