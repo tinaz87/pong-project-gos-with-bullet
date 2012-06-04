@@ -7,6 +7,8 @@
 class FSMState;
 
 typedef MvMap<ObjectId, FSMState*> StateMap;
+typedef MvMap<ObjectId, SubscriberHelper<TransitionObserver> > SubscribersMap;
+
 class FiniteStateMachine: public TransitionObserver
 {
 public:
@@ -22,5 +24,7 @@ private:
 	StateMap	m_stateMap;
 	FSMState*	m_currentState;
 	ObjectId	m_startStateId;
-	SubscriberHelper<TransitionObserver> m_transitionSubscriber;
+
+
+	SubscribersMap m_transitionSubscriber;
 };

@@ -1,6 +1,4 @@
 #pragma once
-#include "Containers.h"
-
 template<class SubscriberImpl> class Publisher;
 
 template<class SubscriberImpl> 
@@ -22,11 +20,7 @@ protected:
 	friend class	Publisher<SubscriberImpl>;
 
 	void						UnsubscribedCallback();
-
-	typedef MvVector<Publisher<SubscriberImpl>*>	PublisherVector;
-	typedef typename PublisherVector::iterator		PublisherIterator;
-
-	PublisherVector				m_publisher;
+	Publisher<SubscriberImpl>*	m_publisher;
 	SubscriberImpl*				m_subscriberImpl;	
 };
 

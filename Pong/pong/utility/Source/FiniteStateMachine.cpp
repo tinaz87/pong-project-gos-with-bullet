@@ -6,8 +6,13 @@ FiniteStateMachine::FiniteStateMachine(const ObjectId& startStateId)
 	:m_currentState(NULL)
 	,m_startStateId(startStateId)
 {
-	m_transitionSubscriber.SetSubscriber(this); // implementa l'interfaccia per ascoltare le transizioni avendo implementato transitionevent
+	//m_transitionSubscriber.SetSubscriber(this); // implementa l'interfaccia per ascoltare le transizioni avendo implementato transitionevent
 												// sottoscrive un ascoltatore di eventi...In questo caso di transizioni
+	
+	//for (SubscribersMap::iterator it = m_transitionSubscriber.begin(); it != m_transitionSubscriber.end(); ++it)
+	//{
+	//	it->second.SetSubscriber(this);
+	//}
 }
 
 void FiniteStateMachine::reset()
@@ -52,7 +57,10 @@ void FiniteStateMachine::onFrame(real frametime, real timestep) // per evitare d
 
 void FiniteStateMachine::addState(FSMState* state)
 {
-	m_transitionSubscriber.Subscribe(&state->getTransitionPublisher()); // Sottoscrivi un publisher di eventi
+	m_transitionSubscriber[state->getStateId()].SetSubscriber(this);
+	m_transitionSubscriber[state->getStateId()].Subscribe(&state->getTransitionPublisher()); // Sottoscrivi un publisher di eventi
+
+	//m_transitionSubscriber.Subscribe(&state->getTransitionPublisher()); // Sottoscrivi un publisher di eventi
 	m_stateMap[state->getStateId()]= state;
 	
 }
