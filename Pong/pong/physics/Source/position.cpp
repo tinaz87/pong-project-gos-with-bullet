@@ -13,6 +13,15 @@ Position::~Position()
 	MV_DELETE(m_motionState);
 }
 
+void Position::setStartPosition(const matrix& position){
+
+	startPosition = position;
+
+}
+
+matrix Position::getStartPosition() const{
+	return startPosition;
+}
 matrix Position::getPosition() const
 {
 	return m_motionState->getGfxWorldTransformation();
@@ -32,3 +41,5 @@ const MotionState* Position::getMotionState() const
 {
 	return m_motionState;
 }
+
+

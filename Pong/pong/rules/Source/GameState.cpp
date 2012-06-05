@@ -15,14 +15,40 @@ GameState::GameState(const ObjectId& stateId)
 	{
 		m_ballBody= static_cast<PhysicsBody*>(property);
 	}
+
+	m_subscriberCollisionEvent.SetSubscriber(this);
 	DLOG_ASSERT(m_ballBody);
+}
+
+void GameState::CollisionEvent(const CollisionData& data){}
+
+void GameState::setCollisionPublisher(Publisher<CollisionObserver>* publisher){
+
+	m_subscriberCollisionEvent.Subscribe(publisher);
 }
 
 void GameState::onFrame(real frametime, real timestep)
 {
+
 	btScalar velocity = m_ballBody->editBody()->getLinearVelocity().length();
-	btVector3 normVelocity = m_ballBody->editBody()->getLinearVelocity().normalized();
-	normVelocity = normVelocity * (velocity + frametime*7.0f);
-	m_ballBody->editBody()->setLinearVelocity( normVelocity ); 
+
+	m_ballBody->setSpeed(velocity + frametime * 10.0f );
+
+	if(m_ballBody->getSpeed() > m_ballBody->getMaximumSpeed())
+	{
+		m_ballBody->setSpeed(m_ballBody->getMaximumSpeed());
+	}
+
+	btVector3 vel = m_ballBody->editBody()->getLinearVelocity();
+	vel.normalize();
+
+	float cs = vel.dot(btVector3(1,0,0));
+
+	if(	abs(cs) < 0.2f){
+
+		m_ballBody->editBody()->setLinearVelocity(m_ballBody->editBody()->getLinearVelocity() + btVector3(10,0,0));
+
+
+	}
 	
 }

@@ -1,77 +1,119 @@
-
 #include "GameObjectSystem.h"
 #include "interfaceComponent.h"
 #include "ScoreManager.h"
 
-const StringHash InterfaceComponent::INTERFACE_COMPONENT_ID= StringHash("InterfaceComponent");
+const StringHash GfxInterface::INTERFACE_PROPERTY_ID= StringHash("InterfaceProperty");
+const StringHash GfxInterface::INTERFACE_PROPERTY_OBJ_ID= StringHash("InterfaceObjProperty");
 
-InterfaceComponent::InterfaceComponent():Component(INTERFACE_COMPONENT_ID,3),m_pd3dDevice(NULL)
-	,scoreData(0,0)
+GfxInterface::GfxInterface():ObjectProperty(INTERFACE_PROPERTY_ID,INTERFACE_PROPERTY_OBJ_ID),scoreData(0,0)
 													
 {
 	m_subscribeScoreObserver.SetSubscriber(this);
 }
 
-void InterfaceComponent::update(real frametime, real timestep){
+const GfxInterfaceText* GfxInterface::getText(ObjectId& id)const{
 
-		if (!m_pd3dDevice){
+	GfxTextMapConstIterator it = textMap.find(id);
 
-			GraphicsComponent* graphics = static_cast<GraphicsComponent*>(GameObjectSystem::GetSingleton().editComponent(GraphicsComponent::GRAPHICS_COMPONENT_ID));
-			m_pd3dDevice = graphics->getDevice();
-			D3DXCreateFont( m_pd3dDevice, 20, 0, FW_BOLD, 0, FALSE, DEFAULT_CHARSET, OUT_DEFAULT_PRECIS, DEFAULT_QUALITY, DEFAULT_PITCH | FF_DONTCARE, TEXT("Arial"), &m_font );
+	if (it != textMap.cend())
+	{
+		return it->second;
+	}
 
-		}
-
-		m_pd3dDevice->BeginScene();
-		displayText();
-		m_pd3dDevice->EndScene();
-
-		// Present the backbuffer contents to the display
-		m_pd3dDevice->Present( NULL, NULL, NULL, NULL );
+	return nullptr;
 
 }
 
+GfxInterfaceText* GfxInterface::editText(ObjectId& id){
 
-void InterfaceComponent::setScorePublisher(ScoreManager* publisher){
+	GfxTextMapIterator it = textMap.find(id);
+
+	if (it != textMap.cend())
+	{
+		return it->second;
+	}
+
+	return nullptr;
+
+}
+
+void GfxInterface::addText(const ObjectId& id,GfxInterfaceText* text ){
+	
+	textMap[id] = text;
+}
+
+void GfxInterface::initializeText(LPDIRECT3DDEVICE9 m_pd3dDevice)  const{
+	
+	D3DXCreateFont( m_pd3dDevice, 20, 0, FW_BOLD, 0, FALSE, DEFAULT_CHARSET, OUT_DEFAULT_PRECIS, DEFAULT_QUALITY, DEFAULT_PITCH | FF_DONTCARE, TEXT("Arial"), &m_font );
+	fontColor = D3DCOLOR_ARGB(255,0,0,255); 
+}
+
+void GfxInterface::setScorePublisher(ScoreManager* publisher){
 
 	m_subscribeScoreObserver.Subscribe(&(publisher->getScorePublisher()));
 
 }
 
 
-void InterfaceComponent::ScoreEvent(const ScoreData& iscore){
+void GfxInterface::ScoreEvent(const ScoreData& iscore){
 
 
 	scoreData = iscore;	
 
 }
 
-
-
-void InterfaceComponent::displayText()
+void GfxInterface::displayText() const
 {
-
-	// Create a colour for the text - in this case blue
-	D3DCOLOR fontColor = D3DCOLOR_ARGB(255,0,0,255);    
 
 	// Create a rectangle to indicate where on the screen it should be drawn
 
-	rct.top=20;
-	rct.left=20;
-	rct.right=780;
-	rct.bottom=rct.top+20;	
-	
 	WCHAR sz[100];
+	for (GfxTextMapConstIterator it = textMap.begin(); it != textMap.end();++it)
+	{
 
-	swprintf_s(sz, L"Points: %d", scoreData.getScoreA() );
-	// Draw some text 
-	m_font->DrawText(NULL, sz , -1, &rct, 0, fontColor );
+		GfxInterfaceText* text = it->second;
 
-	rct.left=700;
+		if (text->active)
+		{
+			mbstowcs(sz,(text->text).c_str(),100);
+			m_font->DrawText(NULL,sz,-1,&(text->rect.editRectangle()),0,fontColor);
+		}
 
-	swprintf_s(sz, L"Points: %d", scoreData.getScoreB() );
+	}
+
+
+	//rct.top=20;
+	//rct.left=20;
+	//rct.right=780;
+	//rct.bottom=rct.top+20;	
+	//
+	//WCHAR sz[100];
+
+	//swprintf_s(sz, L"Points: %d", scoreData.getScoreA() );
 	//// Draw some text 
-	m_font->DrawText(NULL, sz , -1, &rct, 0, fontColor );
+	//m_font->DrawText(NULL, sz , -1, &rct, 0, fontColor );
+
+	//rct.left=700;
+
+	//swprintf_s(sz, L"Points: %d", scoreData.getScoreB() );
+	////// Draw some text 
+	//m_font->DrawText(NULL, sz , -1, &rct, 0, fontColor );
+
+
+
+
+
+
 }
 
-InterfaceComponent::~InterfaceComponent(){}
+GfxInterface::~GfxInterface(){
+
+
+	for (GfxTextMapIterator it = textMap.begin(); it != textMap.end();++it)
+	{
+		MV_DELETE(it->second);
+
+	}
+
+	textMap.clear();
+}

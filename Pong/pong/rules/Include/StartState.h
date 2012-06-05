@@ -2,6 +2,8 @@
 #include "FSMState.h"
 #include "StringHash.h"
 
+class GfxInterfaceText;
+
 class StartState: public FSMState
 {
 public:
@@ -11,4 +13,8 @@ public:
 	virtual void onLeave();
 	virtual void onFrame(real frametime, real timestep) {}
 private:
+
+	static const ObjectId START_STATE_TEXT_ID;
+
+	GfxInterfaceText* startText;
 };

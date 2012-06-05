@@ -4,44 +4,51 @@
 #include "physicsComponent.h"
 #include "PositionControllerComponent.h"
 #include "physicsBody.h"
+#include "interfaceComponent.h"
 
+const ObjectId StartState::START_STATE_TEXT_ID = "StartText";
 
 StartState::StartState(const ObjectId& stateId)
-	:FSMState(stateId)
+	:FSMState(stateId),startText(nullptr)
 {
+	
 
 }
 
 void StartState::onEnter()
 {
 
-	GameObjectSystem& gameobject = GameObjectSystem::GetSingleton();
-
-	PhysicsBody* phyBody = static_cast<PhysicsBody*>(gameobject.editProperty(PhysicsBody::PHY_BODY_ID,ObjectId("ball1")));
-
-	btRigidBody* ballBody = phyBody->editBody();
-
-	// Reset ball velocity and position 
-	if (rand()%2==0)
+	if (!startText)
 	{
-		ballBody->setLinearVelocity(btVector3(100, 35.0f - rand() % 70,0));
+		startText = MV_NEW GfxInterfaceText();
 
-	}else
-		ballBody->setLinearVelocity(btVector3(-100, 35.0f - rand() % 70,0));
-	
-	ballBody->setAngularVelocity(btVector3(0,0,0));
-	ballBody->setInterpolationWorldTransform(btTransform(btMatrix3x3::getIdentity(),btVector3(0,0.f,0.5f)));
-	ballBody->setCenterOfMassTransform(btTransform(btMatrix3x3::getIdentity(),btVector3(0,0.f,0.5f)));
+		startText->rect = InterfaceRectangle(100,100,200,200);
+
+		startText->text = "START TEXT";
+
+		ObjectProperty* prop = GameObjectSystem::GetSingleton().editProperty(GfxInterface::INTERFACE_PROPERTY_ID,GfxInterface::INTERFACE_PROPERTY_OBJ_ID);
+
+		if (prop != NULL)
+		{
+			GfxInterface* gfxInterface = static_cast<GfxInterface*>(prop);
+
+			gfxInterface->addText(START_STATE_TEXT_ID,startText);
+		}
+		
+		
+	}
+
+	startText->active = true;
+
+	GameObjectSystem& gameobject = GameObjectSystem::GetSingleton();
 
 	Component* cmp = gameobject.editComponent(PhysicsComponent::PHYSICS_COMPONENT_ID);
 
-	PhysicsComponent* phyCmp = static_cast<PhysicsComponent*>(cmp);
+	if(cmp != NULL){
+		PhysicsComponent* phyCmp = static_cast<PhysicsComponent*>(cmp);
+		phyCmp->reset();
 
-	btDiscreteDynamicsWorld* world = phyCmp->getWorld();
-
-	// reset ball forces and others
-	world->getBroadphase()->getOverlappingPairCache()->cleanProxyFromPairs(ballBody->getBroadphaseProxy(),world->getDispatcher());
-
+	}
 	// disable component
 	cmp->SetActiveStatus(false);
 
@@ -63,5 +70,5 @@ void StartState::onLeave()
 
 	cmp->SetActiveStatus(true);
 
-
+	startText->active = false;
 }

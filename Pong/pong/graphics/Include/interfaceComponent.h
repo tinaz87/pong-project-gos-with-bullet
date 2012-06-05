@@ -1,36 +1,94 @@
 #pragma once
-#include "graphicsComponent.h"
+#include "d3dx9core.h"
 #include "ScoreObserver.h"
-#include "TransitionObserver.h"
 #include "Subscriber.h"
-
+#include "ObjectProperty.h"
+#include "Containers.h"
 
 class ScoreManager;
 
-class InterfaceComponent: public Component,public ScoreObserver,public TransitionObserver
+
+class InterfaceRectangle{
+
+public :
+	InterfaceRectangle(){};
+
+	InterfaceRectangle(const LONG x,const LONG y,const LONG width,const LONG height){
+
+		m_rectangle.left = x;
+		m_rectangle.top = y;
+		m_rectangle.right = x + width;
+		m_rectangle.bottom = y + height;
+	}
+
+	const RECT& getRectangle() const{
+
+		return m_rectangle;
+	}
+
+	RECT& editRectangle(){
+
+		return m_rectangle;
+	}
+private:
+
+	RECT m_rectangle;
+
+};
+
+struct GfxInterfaceText{
+
+	InterfaceRectangle rect;
+	std::string text;
+	bool active;
+
+};
+
+typedef MvMap<ObjectId,GfxInterfaceText*> GfxTextMap;
+typedef MvMap<ObjectId,GfxInterfaceText*>::iterator GfxTextMapIterator;
+typedef MvMap<ObjectId,GfxInterfaceText*>::const_iterator GfxTextMapConstIterator;
+
+class GfxInterface: public ObjectProperty , public ScoreObserver
 {
+
 public:
-	static const StringHash INTERFACE_COMPONENT_ID;
-	InterfaceComponent();
-	~InterfaceComponent();
-	virtual void update(real frametime, real timestep);
+
+
+
+	static const StringHash INTERFACE_PROPERTY_ID;
+	static const StringHash INTERFACE_PROPERTY_OBJ_ID;
+
+	GfxInterface();
+	~GfxInterface();
 
 	virtual void ScoreEvent(const ScoreData& score);
 
 	void setScorePublisher(ScoreManager* publisher);
-	void setTransitionPublisher(ScoreManager* publisher);
-private:
-	
-	void displayText();
 
-	LPDIRECT3DDEVICE9		 m_pd3dDevice;				// Our rendering device
-	LPD3DXFONT m_font;
 
-	ScoreData scoreData;
+	void initializeText(LPDIRECT3DDEVICE9 m_pd3dDevice) const;
 
-	RECT rct;
-	//std::wstring score;
+	void displayText() const;
+
+	const GfxInterfaceText* getText(ObjectId& id) const;
+
+	GfxInterfaceText* editText(ObjectId& id);
+
+	void addText(const ObjectId& id,GfxInterfaceText* text );
+
+
+private:	
+
+	mutable LPD3DXFONT m_font;
+
+	mutable D3DCOLOR fontColor;
+
+	mutable RECT rct;
+
+	ScoreData scoreData;	
+
+	GfxTextMap textMap;
 
 	SubscriberHelper<ScoreObserver> m_subscribeScoreObserver;
-	SubscriberHelper<TransitionObserver> m_subscribeTransitionObserver;
+	
 };

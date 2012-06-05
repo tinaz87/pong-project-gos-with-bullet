@@ -33,9 +33,9 @@ void ScoreManager::fireScore(const unsigned int iscoreA,const unsigned int iscor
 
 }
 
-void ScoreManager::setCollisionPublisher(PhysicsComponent* publisher){
+void ScoreManager::setCollisionPublisher(Publisher<CollisionObserver>* publisher){
 
-	m_collisionSubscriber.Subscribe(&publisher->getCollisionPublisher());
+	m_collisionSubscriber.Subscribe(publisher);
 }
 
 Publisher<ScoreObserver>& ScoreManager::getScorePublisher(){

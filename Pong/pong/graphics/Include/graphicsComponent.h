@@ -2,11 +2,13 @@
 #include "d3d9.h"
 #include "Component.h"
 #include "textureManager.h"
+#include "interfaceComponent.h"
 #include "Allocator.h" //std::vector std::map stdext::hash_map includes
 
 class TextureMgr;
 class Position;
 class GraphicsDebugger;
+
 
 class GraphicsComponent: public Component
 {
@@ -32,6 +34,8 @@ private:
 	MvVector<uint32>		 m_primitivesCount;
 	MvVector<const Position*>m_position;
 	TextureMgr*				 m_textureManager;
+	
 	const GraphicsDebugger*	 m_graphicsDebugger;
+	const GfxInterface* m_interfaceCmp;
 
 };

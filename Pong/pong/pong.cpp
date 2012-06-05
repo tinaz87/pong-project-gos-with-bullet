@@ -17,7 +17,7 @@
 #include "CustomMemory.h"
 #include "graphicsDebugger.h"
 #include "ScoreManager.h"
-
+#include "ComboControllerProperty.h"
 #define MAX_LOADSTRING 100
 
 // Global Variables:
@@ -183,11 +183,16 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
    Bumper bumperPlayer1("bump1", vector3(-90.f, 0.f, 0.f), true);
    //create controller
    PositionControllerProperty* controller= MV_NEW PositionControllerProperty("bump1", 'A', 'Z');
+   ComboControllerProperty* combo = MV_NEW ComboControllerProperty("bump1",'E','D');
    GameObjectSystem::GetSingleton().addProperty(controller);
+   GameObjectSystem::GetSingleton().addProperty(combo);
 
    Bumper bumperPlayer2("bump2", vector3(90.f, 0.f, 0.f), true);
    PositionControllerProperty* controller2= MV_NEW PositionControllerProperty("bump2", 'O', 'L');
+   ComboControllerProperty* combo2 = MV_NEW ComboControllerProperty("bump2",'E','D');
    GameObjectSystem::GetSingleton().addProperty(controller2);
+   GameObjectSystem::GetSingleton().addProperty(combo2);
+
 
    Ball ball("ball1", vector3(0.f, 0.f, 0.5f));
 
@@ -198,23 +203,29 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
    GameObjectSystem::GetSingleton().addProperty(gfxDebugger);
 #endif
 
+   // Add interface property
+   GfxInterface* gfxInterface = MV_NEW GfxInterface();
+   gfxInterface->setScorePublisher(ScoreManager::GetSingletonPtr());
+
+   GameObjectSystem::GetSingleton().addProperty(gfxInterface);
+  
    //create components 
    PositionControllerComponent* positionControllerComponent= MV_NEW PositionControllerComponent();
    PhysicsComponent* physicsComponent= MV_NEW PhysicsComponent(1<<16, 1<<16);
    GraphicsComponent* graphicsComponent= MV_NEW GraphicsComponent(hWnd);
-   InterfaceComponent* interfaceComponent = MV_NEW InterfaceComponent();
+
    GameRulesComponent* gameRulesComponent= MV_NEW GameRulesComponent();
 
 
-
-   ScoreManager::GetSingleton().setCollisionPublisher(physicsComponent);
-   gameRulesComponent->setScorePublisher(ScoreManager::GetSingletonPtr());
-   interfaceComponent->setScorePublisher(ScoreManager::GetSingletonPtr());
+   positionControllerComponent->setCollisionPublisher(&(physicsComponent->getCollisionPublisher()));
+   ScoreManager::GetSingleton().setCollisionPublisher(&physicsComponent->getCollisionPublisher());
+   gameRulesComponent->setScorePublisher(&(ScoreManager::GetSingletonPtr()->getScorePublisher()));
+  // interfaceComponent->setScorePublisher(ScoreManager::GetSingletonPtr());
 
    GameObjectSystem::GetSingleton().addComponent(positionControllerComponent);
    GameObjectSystem::GetSingleton().addComponent(physicsComponent);
    GameObjectSystem::GetSingleton().addComponent(graphicsComponent);
-   GameObjectSystem::GetSingleton().addComponent(interfaceComponent);
+
    GameObjectSystem::GetSingleton().addComponent(gameRulesComponent);
    // Initialize Direct3D
    //create graphics component here

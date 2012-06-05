@@ -225,6 +225,9 @@
     <ClInclude Include="graphics\Include\interfaceComponent.h">
       <Filter>graphics\DX</Filter>
     </ClInclude>
+    <ClInclude Include="Input\Include\ComboControllerProperty.h">
+      <Filter>input</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -343,6 +346,9 @@
     </ClCompile>
     <ClCompile Include="graphics\Source\interfaceComponent.cpp">
       <Filter>graphics\DX</Filter>
+    </ClCompile>
+    <ClCompile Include="Input\Source\ComboControllerProperty.cpp">
+      <Filter>input</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

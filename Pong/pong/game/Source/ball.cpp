@@ -34,6 +34,8 @@ Ball::Ball(const std::string& ballId, const vector3& posOffset)
 	Position* bumperPosition= MV_NEW Position(ballObjId);
 	quaternion initRotation= QuaternionFromRotationMatrix(MAT_IDENTITY);
 	matrix matPos= MatrixPosition(posOffset, initRotation);
+
+	bumperPosition->setStartPosition(matPos);
 	bumperPosition->setPosition(matPos);
 	GameObjectSystem::GetSingleton().addProperty(bumperPosition);
 
@@ -41,8 +43,12 @@ Ball::Ball(const std::string& ballId, const vector3& posOffset)
 	btSphereShape* sphereShape= MV_NEW btSphereShape(1.5f);
 	sphereShape->setMargin(0.3f);
 	PhysicsBody* ballBody= MV_NEW PhysicsBody(ballObjId, 10.f, sphereShape);
-	ballBody->setVelocity(vector3(.002f,0.0f,0.f));
 
+	ballBody->setStartVelocity(vector3(0,10,0));
+	ballBody->setVelocity(vector3(0,10.0f,0.f));
+
+
+	ballBody->setMaximumSpeed(250.0f);
 	//Add the object
 	GameObjectSystem::GetSingleton().addProperty(ballBody);
 }

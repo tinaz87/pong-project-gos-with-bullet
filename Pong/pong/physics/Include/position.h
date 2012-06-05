@@ -14,6 +14,12 @@ public:
 	MotionState*		editMotionState();
 	const MotionState*	getMotionState() const;
 
+	matrix				getStartPosition() const;
+
+	void				setStartPosition(const matrix& position);
+
+
 private:
 	MotionState*	m_motionState;
+	matrix startPosition;
 };
