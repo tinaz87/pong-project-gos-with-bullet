@@ -9,6 +9,7 @@
 #include "BulletDynamics/ConstraintSolver/btGeneric6DofConstraint.h"
 #include "glog/logging.h"
 #include "LinearMath/btAlignedAllocator.h"
+#include "position.h"
 
 const StringHash PhysicsComponent::PHYSICS_COMPONENT_ID= StringHash("PhyCmp");
 PhysicsComponent* PhysicsComponent::s_activePhysicsComponent= NULL;
@@ -109,6 +110,55 @@ PhysicsComponent::~PhysicsComponent()
 		s_activePhysicsComponent= NULL;
 	}
 }
+
+
+void PhysicsComponent::reset(){
+
+	GameObjectSystem& gameobject = GameObjectSystem::GetSingleton();
+	ObjectPropertyTable* opt = gameobject.editProperties(PhysicsBody::PHY_BODY_ID);
+
+	if (opt != NULL)
+	{
+		
+		for (ObjectPropertyTable::iterator it = opt->begin();it != opt->end();++it)
+		{
+			PhysicsBody* physicBody = static_cast<PhysicsBody*>(it->second);
+			btRigidBody* rigidBody = physicBody->editBody();
+			
+			ObjectProperty* objectProperty = gameobject.editProperty(Position::POSITION_ID,physicBody->getObjectId());
+
+			if (objectProperty != NULL)
+			{
+				Position* position = static_cast<Position*>(objectProperty);
+
+				matrix s_position = position->getStartPosition();
+
+				// reset positio to start position
+				position->setPosition(s_position);
+
+
+				btTransform m_transform;
+
+				m_transform.setFromOpenGLMatrix(&s_position._11);
+				rigidBody->setInterpolationWorldTransform(m_transform);
+				rigidBody->setCenterOfMassTransform(m_transform);
+
+			}
+
+			physicBody->reset();
+			
+			physicBody->setVelocity(physicBody->getStartVelocity());
+
+			if (m_world->getBroadphase()->getOverlappingPairCache() != NULL )
+				m_world->getBroadphase()->getOverlappingPairCache()->cleanProxyFromPairs(rigidBody->getBroadphaseProxy(),m_world->getDispatcher());
+
+		}
+
+	}
+
+}
+
+
 
 void PhysicsComponent::update(real frametime, real timestep)
 {

@@ -17,7 +17,7 @@ public:
 
 	Publisher<ScoreObserver>& getScorePublisher();
 
-	void setCollisionPublisher(PhysicsComponent* publisher);
+	void setCollisionPublisher(Publisher<CollisionObserver>* publisher);
 	
 	virtual ~ScoreManager();
 

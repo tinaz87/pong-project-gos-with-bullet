@@ -16,7 +16,7 @@ public:
 
 	virtual void ScoreEvent(const ScoreData& score);
 
-	void setScorePublisher(ScoreManager* iScoremanager);
+	void setScorePublisher(Publisher<ScoreObserver>* publisher);
 
 private:
 

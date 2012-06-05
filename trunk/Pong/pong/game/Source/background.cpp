@@ -38,12 +38,14 @@ Background::Background(const char* backgroundFilename)
 	vector3 wallRightTrx(107.5f, 0.f, 0.f);
 	quaternion wallLateralRot= QuaternionFromRotationMatrix(MAT_IDENTITY);
 	Position* wallRightPosition= MV_NEW Position("wall1");
+	wallRightPosition->setStartPosition(MatrixPosition(wallRightTrx, wallLateralRot));
 	wallRightPosition->setPosition(MatrixPosition(wallRightTrx, wallLateralRot));
 	GameObjectSystem::GetSingleton().addProperty(wallRightPosition);
 	PhysicsBody* wallRight= MV_NEW PhysicsBody("wall1", 0.f, wallShape);
 	
 	vector3 wallLeftTrx(-107.5f, 0.f, 0.f);
 	Position* wallLeftPosition= MV_NEW Position("wall2");
+	wallLeftPosition->setStartPosition(MatrixPosition(wallLeftTrx, wallLateralRot));
 	wallLeftPosition->setPosition(MatrixPosition(wallLeftTrx, wallLateralRot));
 	GameObjectSystem::GetSingleton().addProperty(wallLeftPosition);
 	PhysicsBody* wallLeft= MV_NEW PhysicsBody("wall2", 0.f, wallShape);
@@ -51,12 +53,14 @@ Background::Background(const char* backgroundFilename)
 	quaternion wallUpDownRot= InitQuaternion(0.f, 0.f, sinf(PI/4.f), cosf(PI/4.f));
 	vector3 wallUpTrx(0.f, -107.5f, 0.f);
 	Position* wallUpPosition= MV_NEW Position("wall3");
+	wallUpPosition->setStartPosition(MatrixPosition(wallUpTrx, wallUpDownRot));
 	wallUpPosition->setPosition(MatrixPosition(wallUpTrx, wallUpDownRot));
 	GameObjectSystem::GetSingleton().addProperty(wallUpPosition);
 	PhysicsBody* wallUp= MV_NEW PhysicsBody("wall3", 0.f, wallShape);
 	
 	vector3 wallDownTrx(0.f, 107.5f, 0.f);
 	Position* wallDownPosition= MV_NEW Position("wall4");
+	wallDownPosition->setStartPosition(MatrixPosition(wallDownTrx, wallUpDownRot));
 	wallDownPosition->setPosition(MatrixPosition(wallDownTrx, wallUpDownRot));
 	GameObjectSystem::GetSingleton().addProperty(wallDownPosition);
 	PhysicsBody* wallDown= MV_NEW PhysicsBody("wall4", 0.f, wallShape);

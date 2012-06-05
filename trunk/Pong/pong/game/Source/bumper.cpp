@@ -34,6 +34,7 @@ Bumper::Bumper(const std::string& bumperId, const vector3& posOffset, bool setKi
 	Position* bumperPosition= MV_NEW Position(bumperObjId);
 	quaternion initRotation= QuaternionFromRotationMatrix(MAT_IDENTITY);
 	matrix matPos= MatrixPosition(posOffset, initRotation);
+	bumperPosition->setStartPosition(matPos);
 	bumperPosition->setPosition(matPos);
 	GameObjectSystem::GetSingleton().addProperty(bumperPosition);
 

@@ -30,7 +30,7 @@ GameRulesComponent::GameRulesComponent()
 	:Component(RULES_COMPONENT_ID, 3)
 	,FiniteStateMachine(START_STATE)
 {
-	
+	//TODO: sistemare il problema di come settare il ppublisher al gamestate
 	m_subscribeScoreObserver.SetSubscriber(this);
 	m_keyPause= false;
 	configureFSM();
@@ -84,9 +84,9 @@ void GameRulesComponent::update(real frametime, real timestep)
 
 }
 
-void GameRulesComponent::setScorePublisher(ScoreManager* iScoremanager){
+void GameRulesComponent::setScorePublisher(Publisher<ScoreObserver>* publisher){
 
-	m_subscribeScoreObserver.Subscribe(&iScoremanager->getScorePublisher());
+	m_subscribeScoreObserver.Subscribe(publisher);
 
 }
 

@@ -37,6 +37,8 @@ public:
 		return m_world;
 	}
 
+	void reset();
+
 private:
 	void								AddGfxDebug();
 	void								AddRegisteredPhysicsObjects();

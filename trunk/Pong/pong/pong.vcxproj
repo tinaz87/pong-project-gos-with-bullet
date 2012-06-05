@@ -108,6 +108,7 @@
     <ClInclude Include="graphics\Include\graphicsDebugger.h" />
     <ClInclude Include="graphics\Include\interfaceComponent.h" />
     <ClInclude Include="graphics\Include\textureManager.h" />
+    <ClInclude Include="Input\Include\ComboControllerProperty.h" />
     <ClInclude Include="Input\Include\InputManager.h" />
     <ClInclude Include="Input\Include\KeyboardInputManager.h" />
     <ClInclude Include="Input\Include\PositionControllerComponent.h" />
@@ -161,6 +162,7 @@
     <ClCompile Include="graphics\Source\graphicsDebugger.cpp" />
     <ClCompile Include="graphics\Source\interfaceComponent.cpp" />
     <ClCompile Include="graphics\Source\textureManager.cpp" />
+    <ClCompile Include="Input\Source\ComboControllerProperty.cpp" />
     <ClCompile Include="Input\Source\InputManager.cpp" />
     <ClCompile Include="Input\Source\KeyboardInputManager.cpp" />
     <ClCompile Include="Input\Source\PositionControllerComponent.cpp" />

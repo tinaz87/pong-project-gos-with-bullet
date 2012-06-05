@@ -47,6 +47,7 @@ void FiniteStateMachine::updateState(const ObjectId& transitionId)
 	}
 }
 
+
 void FiniteStateMachine::onFrame(real frametime, real timestep) // per evitare di cambiare piu stati nel giro di un solo frame
 {
 	if(m_currentState != NULL)
@@ -57,6 +58,7 @@ void FiniteStateMachine::onFrame(real frametime, real timestep) // per evitare d
 
 void FiniteStateMachine::addState(FSMState* state)
 {
+	
 	m_transitionSubscriber[state->getStateId()].SetSubscriber(this);
 	m_transitionSubscriber[state->getStateId()].Subscribe(&state->getTransitionPublisher()); // Sottoscrivi un publisher di eventi
 

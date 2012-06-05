@@ -8,6 +8,7 @@
 #include "physicsBody.h"
 #include "KeyboardInputManager.h"
 
+
 // Our custom FVF, which describes our custom vertex structure
 #define D3DFVF_CUSTOMVERTEX (D3DFVF_XYZ|D3DFVF_DIFFUSE|D3DFVF_TEX1)
 
@@ -147,6 +148,15 @@ GraphicsComponent::GraphicsComponent(HWND hWnd)
 	{
 		m_graphicsDebugger= static_cast<GraphicsDebugger*>(debugGfxProperty);
 	}
+
+	ObjectProperty* interfaceGfxProperty = gameObjectSystem.editProperty(GfxInterface::INTERFACE_PROPERTY_ID, GfxInterface::INTERFACE_PROPERTY_OBJ_ID);
+	
+	if(interfaceGfxProperty!=NULL)
+	{
+		m_interfaceCmp = static_cast<GfxInterface*>(interfaceGfxProperty);
+		m_interfaceCmp -> initializeText(m_pd3dDevice);
+	}
+
 }
 
 GraphicsComponent::~GraphicsComponent()
@@ -232,13 +242,13 @@ void GraphicsComponent::update(real frametime, real timestep)
 		}
 		
 
-
+		m_interfaceCmp->displayText();
  		// End the scene
  		m_pd3dDevice->EndScene();
  	}
  
  	// Present the backbuffer contents to the display
- 	//m_pd3dDevice->Present( NULL, NULL, NULL, NULL );
+ 	m_pd3dDevice->Present( NULL, NULL, NULL, NULL );
 }
 
 void GraphicsComponent::setPosition(const Position* position)

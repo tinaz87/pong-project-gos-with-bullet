@@ -20,9 +20,24 @@ public:
 	btRigidBody*       editBody();
 	btCollisionShape*  editCollisionShape();
 	void			   setKinematic();
+
 	void			   setVelocity(const vector3& velocity);
+
+
 	void			   setSpeed(real speed);
+	const real		   getSpeed() const;
+
+
+	const vector3& getStartVelocity()const;
+	void setStartVelocity(const vector3& velocity);
+
+	void setMaximumSpeed(const float ispeed);
+
+	const float getMaximumSpeed()const;
 
 private:
 	btRigidBody*	m_body;
+	float			m_maxSpeed;
+	vector3			startVelocity;
+
 };

@@ -13,7 +13,7 @@ PhysicsBody::PhysicsBody(const ObjectId& objectId,
 						 const vector3& inertia, 
 						 vector3 gfxOffset)
 	:ObjectProperty(PHY_BODY_ID, objectId)
-	,m_body(NULL)
+	,m_body(NULL),startVelocity(0,0,0),m_maxSpeed(100.0f)
 {
 	DLOG_ASSERT(mass >= 0.f);
 	DLOG_ASSERT(collisionShape != NULL);
@@ -49,7 +49,7 @@ PhysicsBody::PhysicsBody(const ObjectId& objectId,
 		m_body->setCcdSweptSphereRadius(0.2f);
 	}
 
-	StringHash a;
+	//StringHash a;
 
 	
 	m_body->btCollisionObject::setUserPointer(const_cast<void*>(static_cast< const void*>(&(ObjectProperty::getObjectId()))));
@@ -69,7 +69,17 @@ void PhysicsBody::reset()
 	m_body->setAngularVelocity(zero);
 	m_body->setAngularFactor(1);
 	m_body->clearForces();
-	m_body->setActivationState(WANTS_DEACTIVATION);
+	m_body->setActivationState(ISLAND_SLEEPING);
+}
+
+void PhysicsBody::setMaximumSpeed(const float ispeed){
+
+	m_maxSpeed = ispeed;
+}
+
+const float  PhysicsBody::getMaximumSpeed() const{
+
+	return m_maxSpeed;
 }
 
 const btRigidBody* PhysicsBody::getBody() const
@@ -95,8 +105,16 @@ void PhysicsBody::setKinematic()
 
 void PhysicsBody::setVelocity(const vector3& velocity)
 {
-	m_body->setLinearVelocity(btVector3(velocity.x, velocity.y, 0.f));
+	btVector3 vel = btVector3(velocity.x, velocity.y, 0.f);
+	m_body->setLinearVelocity(vel);
+
+	real length= vel.length();
+	if(length > 0.001f)
+	{
+		m_body->activate(true);
+	}
 }
+
 
 void PhysicsBody::setSpeed(real speed)
 {
@@ -110,4 +128,24 @@ void PhysicsBody::setSpeed(real speed)
 	{
 		m_body->setLinearVelocity(btVector3(speed, 0.f, 0.f));
 	}
+}
+
+
+const real PhysicsBody::getSpeed()const{
+
+	const btVector3& velocity= m_body->getLinearVelocity();
+	return velocity.length();
+
+}
+
+void PhysicsBody::setStartVelocity(const vector3& velocity){
+
+	startVelocity = velocity;
+
+}
+
+const vector3& PhysicsBody::getStartVelocity()const{
+
+	return startVelocity;
+
 }
