@@ -25,6 +25,8 @@ public:
 
 	void		 reset();
 
+	const unsigned int getScore(unsigned int nplayer)const;
+
 private:
 	
 	ScoreManager(const ObjectId ball,const ObjectId leftWall,const ObjectId rightWall);

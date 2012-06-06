@@ -82,4 +82,11 @@ void ScoreManager::checkCollision(const ObjectId& idCollisionA,const ObjectId& i
 
 }
 
+const unsigned int ScoreManager::getScore(unsigned int nplayer)const{
 
+	if(nplayer == 1)
+		return scoreLeftPlayer;
+	else
+		return scoreRightPlayer;
+
+}

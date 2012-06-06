@@ -44,8 +44,8 @@ Ball::Ball(const std::string& ballId, const vector3& posOffset)
 	sphereShape->setMargin(0.3f);
 	PhysicsBody* ballBody= MV_NEW PhysicsBody(ballObjId, 10.f, sphereShape);
 
-	ballBody->setStartVelocity(vector3(0,10,0));
-	ballBody->setVelocity(vector3(0,10.0f,0.f));
+	ballBody->setStartVelocity(vector3(90.0f,0.0f,0.0f));
+	ballBody->setVelocity(vector3(90.0f,0.0f,0.0f));
 
 
 	ballBody->setMaximumSpeed(250.0f);

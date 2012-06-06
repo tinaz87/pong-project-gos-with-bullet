@@ -228,6 +228,12 @@
     <ClInclude Include="Input\Include\ComboControllerProperty.h">
       <Filter>input</Filter>
     </ClInclude>
+    <ClInclude Include="sound\Include\SoundComponent.h">
+      <Filter>sound</Filter>
+    </ClInclude>
+    <ClInclude Include="sound\Include\SfxEffect.h">
+      <Filter>sound</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -349,6 +355,12 @@
     </ClCompile>
     <ClCompile Include="Input\Source\ComboControllerProperty.cpp">
       <Filter>input</Filter>
+    </ClCompile>
+    <ClCompile Include="sound\Source\SoundComponent.cpp">
+      <Filter>sound</Filter>
+    </ClCompile>
+    <ClCompile Include="sound\Source\SfxEffect.cpp">
+      <Filter>sound</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

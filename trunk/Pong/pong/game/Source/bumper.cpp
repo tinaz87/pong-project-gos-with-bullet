@@ -5,6 +5,8 @@
 #include "physicsBody.h"
 #include "BulletCollision/CollisionShapes/btBoxShape.h"
 #include "GameObjectSystem.h"
+#include "SfxEffect.h"
+
 
 Bumper::Bumper(const std::string& bumperId, const vector3& posOffset, bool setKinematic)
 {
@@ -29,6 +31,13 @@ Bumper::Bumper(const std::string& bumperId, const vector3& posOffset, bool setKi
 
  	GfxTexture* texture= MV_NEW GfxTexture(bumperObjId, "bumper.jpg");
  	GameObjectSystem::GetSingleton().addProperty(texture);
+
+	// Create Sound
+
+	/*SfxEffect* sound = MV_NEW SfxEffect(bumperObjId);
+	sound->setSound(L"Bee.wav");
+	GameObjectSystem::GetSingleton().addProperty(sound);*/
+
 
 	//Create position
 	Position* bumperPosition= MV_NEW Position(bumperObjId);

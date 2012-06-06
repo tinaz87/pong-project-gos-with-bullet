@@ -1,4 +1,5 @@
 #pragma once
+#include "interfaceComponent.h"
 #include "ObjectId.h"
 #include "Containers.h"
 #include "Publisher.h"
