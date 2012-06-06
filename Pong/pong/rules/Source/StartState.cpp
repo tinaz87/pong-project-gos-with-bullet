@@ -1,15 +1,15 @@
 #include "StartState.h"
-#include "GameState.h"
+//#include "GameState.h"
 #include "GameObjectSystem.h"
 #include "physicsComponent.h"
 #include "PositionControllerComponent.h"
 #include "physicsBody.h"
-#include "interfaceComponent.h"
+//#include "interfaceComponent.h"
 
-const ObjectId StartState::START_STATE_TEXT_ID = "StartText";
+const ObjectId StartState::START_STATE_TEXT_ID = "START_STATE_ID";
 
 StartState::StartState(const ObjectId& stateId)
-	:FSMState(stateId),startText(nullptr)
+	:FSMState(stateId),startText(NULL)
 {
 	
 
@@ -22,9 +22,9 @@ void StartState::onEnter()
 	{
 		startText = MV_NEW GfxInterfaceText();
 
-		startText->rect = InterfaceRectangle(100,100,200,200);
+		startText->rect = InterfaceRectangle(300,350,200,200);
 
-		startText->text = "START TEXT";
+		startText->text = "----- Premi i Per iniziare ---- ";
 
 		ObjectProperty* prop = GameObjectSystem::GetSingleton().editProperty(GfxInterface::INTERFACE_PROPERTY_ID,GfxInterface::INTERFACE_PROPERTY_OBJ_ID);
 
@@ -44,17 +44,19 @@ void StartState::onEnter()
 
 	Component* cmp = gameobject.editComponent(PhysicsComponent::PHYSICS_COMPONENT_ID);
 
-	if(cmp != NULL){
+	if (cmp != NULL){
+		
 		PhysicsComponent* phyCmp = static_cast<PhysicsComponent*>(cmp);
 		phyCmp->reset();
 
+		cmp->SetActiveStatus(false);
+
+		cmp = gameobject.editComponent(PositionControllerComponent::POSITION_CONTROLLER_ID);
+
+		if (cmp!= NULL)
+			cmp->SetActiveStatus(false);
+		
 	}
-	// disable component
-	cmp->SetActiveStatus(false);
-
-	cmp = gameobject.editComponent(PositionControllerComponent::POSITION_CONTROLLER_ID);
-
-	cmp->SetActiveStatus(false);
 
 }
 
@@ -64,11 +66,20 @@ void StartState::onLeave()
 
 	Component* cmp = gameobject.editComponent(PhysicsComponent::PHYSICS_COMPONENT_ID);
 
-	cmp->SetActiveStatus(true);
+	if (cmp != NULL){
 
-	cmp = gameobject.editComponent(PositionControllerComponent::POSITION_CONTROLLER_ID);
 
-	cmp->SetActiveStatus(true);
+		cmp->SetActiveStatus(true);
+
+		cmp = gameobject.editComponent(PositionControllerComponent::POSITION_CONTROLLER_ID);
+
+		if (cmp!= NULL)
+			cmp->SetActiveStatus(true);
+
+		
+	}
 
 	startText->active = false;
+
+
 }

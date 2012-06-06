@@ -1,11 +1,8 @@
 #pragma once
 #include "d3dx9core.h"
-#include "ScoreObserver.h"
-#include "Subscriber.h"
 #include "ObjectProperty.h"
 #include "Containers.h"
 
-class ScoreManager;
 
 
 class InterfaceRectangle{
@@ -48,7 +45,7 @@ typedef MvMap<ObjectId,GfxInterfaceText*> GfxTextMap;
 typedef MvMap<ObjectId,GfxInterfaceText*>::iterator GfxTextMapIterator;
 typedef MvMap<ObjectId,GfxInterfaceText*>::const_iterator GfxTextMapConstIterator;
 
-class GfxInterface: public ObjectProperty , public ScoreObserver
+class GfxInterface: public ObjectProperty
 {
 
 public:
@@ -61,9 +58,9 @@ public:
 	GfxInterface();
 	~GfxInterface();
 
-	virtual void ScoreEvent(const ScoreData& score);
+	
 
-	void setScorePublisher(ScoreManager* publisher);
+	
 
 
 	void initializeText(LPDIRECT3DDEVICE9 m_pd3dDevice) const;
@@ -85,10 +82,7 @@ private:
 
 	mutable RECT rct;
 
-	ScoreData scoreData;	
-
 	GfxTextMap textMap;
 
-	SubscriberHelper<ScoreObserver> m_subscribeScoreObserver;
 	
 };

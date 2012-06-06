@@ -5,10 +5,10 @@
 const StringHash GfxInterface::INTERFACE_PROPERTY_ID= StringHash("InterfaceProperty");
 const StringHash GfxInterface::INTERFACE_PROPERTY_OBJ_ID= StringHash("InterfaceObjProperty");
 
-GfxInterface::GfxInterface():ObjectProperty(INTERFACE_PROPERTY_ID,INTERFACE_PROPERTY_OBJ_ID),scoreData(0,0)
+GfxInterface::GfxInterface():ObjectProperty(INTERFACE_PROPERTY_ID,INTERFACE_PROPERTY_OBJ_ID)
 													
 {
-	m_subscribeScoreObserver.SetSubscriber(this);
+	
 }
 
 const GfxInterfaceText* GfxInterface::getText(ObjectId& id)const{
@@ -48,19 +48,19 @@ void GfxInterface::initializeText(LPDIRECT3DDEVICE9 m_pd3dDevice)  const{
 	fontColor = D3DCOLOR_ARGB(255,0,0,255); 
 }
 
-void GfxInterface::setScorePublisher(ScoreManager* publisher){
-
-	m_subscribeScoreObserver.Subscribe(&(publisher->getScorePublisher()));
-
-}
-
-
-void GfxInterface::ScoreEvent(const ScoreData& iscore){
+//void GfxInterface::setScorePublisher(ScoreManager* publisher){
+//
+//	m_subscribeScoreObserver.Subscribe(&(publisher->getScorePublisher()));
+//
+//}
 
 
-	scoreData = iscore;	
-
-}
+//void GfxInterface::ScoreEvent(const ScoreData& iscore){
+//
+//
+//	scoreData = iscore;	
+//
+//}
 
 void GfxInterface::displayText() const
 {

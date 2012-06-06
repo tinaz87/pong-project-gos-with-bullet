@@ -1,4 +1,4 @@
-#include "../Include/AudioWrapper.h"
+#include "AudioWrapper.h"
 
 // Must match order of g_PRESET_NAMES
 XAUDIO2FX_REVERB_I3DL2_PARAMETERS g_PRESET_PARAMS[ NUM_PRESETS ] =
@@ -238,8 +238,8 @@ HRESULT AudioWrapper::InitializeXAudio(){
 
 void AudioWrapper::initialize3DSound(XAUDIO2_DEVICE_DETAILS& details){
 
-	vListenerPos = D3DXVECTOR3( 0, 0, float( ZMAX ) );
-    vEmitterPos = D3DXVECTOR3( 0, 0, float( ZMAX ) );
+	vListenerPos = D3DXVECTOR3( 0.f, 0.f, 0.5f );
+    vEmitterPos = D3DXVECTOR3(0.f, 0.f, 0.5f );
 
     fListenerAngle = 0;
     fUseListenerCone = TRUE;
@@ -371,7 +371,7 @@ HRESULT AudioWrapper::PrepareAudio(const LPCWSTR fileName){
     buffer.pAudioData = pbSampleData;
     buffer.Flags = XAUDIO2_END_OF_STREAM;
     buffer.AudioBytes = cbWaveSize;
-    buffer.LoopCount = XAUDIO2_LOOP_INFINITE; // Numero di Loop max 255
+    buffer.LoopCount = 0; // Numero di Loop max 255
 
     
 	if (FAILED(hr = pSourceVoice->SubmitSourceBuffer( &buffer )))
@@ -475,6 +475,16 @@ HRESULT AudioWrapper::UpdateAudio(float fElapsedTime){
             voice->SetOutputFilterParameters(pSubmixVoice, &FilterParametersReverb);
         }
 
+	}
+
+
+	XAUDIO2_VOICE_STATE state;
+
+	pSourceVoice->GetState(&state);
+
+	if (state.SamplesPlayed == 0)
+	{
+		StopAudio();
 	}
 
 	nFrameToApply3DAudio++;

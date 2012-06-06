@@ -18,6 +18,8 @@
 #include "graphicsDebugger.h"
 #include "ScoreManager.h"
 #include "ComboControllerProperty.h"
+#include "SoundComponent.h"
+
 #define MAX_LOADSTRING 100
 
 // Global Variables:
@@ -54,6 +56,7 @@ int APIENTRY _tWinMain(HINSTANCE hInstance,
 	UNREFERENCED_PARAMETER(hPrevInstance);
 	UNREFERENCED_PARAMETER(lpCmdLine);
 
+	
 	//init systems
 	allocator::CreateInstance();
 	InitGlog();
@@ -205,28 +208,34 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 
    // Add interface property
    GfxInterface* gfxInterface = MV_NEW GfxInterface();
-   gfxInterface->setScorePublisher(ScoreManager::GetSingletonPtr());
-
    GameObjectSystem::GetSingleton().addProperty(gfxInterface);
   
+
    //create components 
    PositionControllerComponent* positionControllerComponent= MV_NEW PositionControllerComponent();
    PhysicsComponent* physicsComponent= MV_NEW PhysicsComponent(1<<16, 1<<16);
    GraphicsComponent* graphicsComponent= MV_NEW GraphicsComponent(hWnd);
-
+  
+   //Sound Component
+   //SoundComponent*	soundComponent = MV_NEW SoundComponent();
+   
    GameRulesComponent* gameRulesComponent= MV_NEW GameRulesComponent();
 
 
    positionControllerComponent->setCollisionPublisher(&(physicsComponent->getCollisionPublisher()));
    ScoreManager::GetSingleton().setCollisionPublisher(&physicsComponent->getCollisionPublisher());
+  // soundComponent->setCollisionPublisher(&physicsComponent->getCollisionPublisher());
    gameRulesComponent->setScorePublisher(&(ScoreManager::GetSingletonPtr()->getScorePublisher()));
-  // interfaceComponent->setScorePublisher(ScoreManager::GetSingletonPtr());
+  
 
    GameObjectSystem::GetSingleton().addComponent(positionControllerComponent);
    GameObjectSystem::GetSingleton().addComponent(physicsComponent);
    GameObjectSystem::GetSingleton().addComponent(graphicsComponent);
 
+   //GameObjectSystem::GetSingleton().addComponent(soundComponent);
+
    GameObjectSystem::GetSingleton().addComponent(gameRulesComponent);
+
    // Initialize Direct3D
    //create graphics component here
    // Create the vertex buffer

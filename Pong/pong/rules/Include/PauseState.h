@@ -11,4 +11,6 @@ public:
 	virtual void onLeave();
 	virtual void onFrame(real frametime, real timestep) {}
 private:
+	static const ObjectId PAUSE_STATE_TEXT;
+	GfxInterfaceText* pauseText;
 };

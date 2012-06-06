@@ -1,9 +1,8 @@
-﻿  gameRulesComponent.cpp
-  GameState.cpp
-  Generazione del codice in corso...
-  Compilazione in corso...
-  StartState.cpp
-c:\users\probook\desktop\master\gameplay programming\pong progetto esame\pong\pong\graphics\include\interfacecomponent.h(39): warning C4099: 'GfxInterfaceText': il nome del tipo che in precedenza utilizzava 'class' ora utilizza 'struct'
-          c:\users\probook\desktop\master\gameplay programming\pong progetto esame\pong\pong\rules\include\startstate.h(5): vedere la dichiarazione di 'GfxInterfaceText'
+﻿  pong.cpp
+c:\users\probook\desktop\master\gameplay programming\pong progetto esame\pong\pong\sound\include\audiowrapper.h(93): warning C4154: eliminazione di un'espressione di matrice. Fornita conversione a puntatore
+c:\users\probook\desktop\master\gameplay programming\pong progetto esame\pong\pong\sound\include\audiowrapper.h(94): warning C4154: eliminazione di un'espressione di matrice. Fornita conversione a puntatore
+  bumper.cpp
+c:\users\probook\desktop\master\gameplay programming\pong progetto esame\pong\pong\sound\include\audiowrapper.h(93): warning C4154: eliminazione di un'espressione di matrice. Fornita conversione a puntatore
+c:\users\probook\desktop\master\gameplay programming\pong progetto esame\pong\pong\sound\include\audiowrapper.h(94): warning C4154: eliminazione di un'espressione di matrice. Fornita conversione a puntatore
   Generazione del codice in corso...
   pong.vcxproj -> C:\Users\PROBOOK\Desktop\MASTER\GamePlay Programming\Pong Progetto Esame\Pong\Debug\pong.exe

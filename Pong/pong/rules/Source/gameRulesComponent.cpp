@@ -7,7 +7,7 @@
 #include "KeyboardInputManager.h"
 #include "ScoreManager.h"
 
-#define POINTS 10
+#define POINTS 2
 
 
 const StringHash GameRulesComponent::RULES_COMPONENT_ID= StringHash("Rules");
@@ -52,6 +52,7 @@ void GameRulesComponent::ScoreEvent(const ScoreData& score){
 
 	TransitionObserverData data(idTransition);	
 
+	
 	TransitionEvent(data);
 
 }
