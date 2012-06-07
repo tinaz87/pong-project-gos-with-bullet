@@ -9,106 +9,16 @@
 const StringHash PositionControllerComponent::POSITION_CONTROLLER_ID= StringHash("posController");
 
 PositionControllerComponent::PositionControllerComponent()
-	:Component(POSITION_CONTROLLER_ID, 0),oldSpeed(0.0f),powerShoot(false)
+	:Component(POSITION_CONTROLLER_ID, 0)
 {
-	m_subscribeCollisionObserver.SetSubscriber(this);
+
 }
 
 PositionControllerComponent::~PositionControllerComponent()
 {
 }
 
-void PositionControllerComponent::CollisionEvent(const CollisionData& data){
 
-	bool shoot = false;
-
-	ObjectProperty* ballProp= GameObjectSystem::GetSingleton().editProperty(PhysicsBody::PHY_BODY_ID, "ball1");
-
-	ObjectProperty* bump1Prop= GameObjectSystem::GetSingleton().editProperty(PhysicsBody::PHY_BODY_ID, "bump1");
-
-	ObjectProperty* bump2Prop= GameObjectSystem::GetSingleton().editProperty(PhysicsBody::PHY_BODY_ID, "bump2");
-
-	if(ballProp != NULL && bump1Prop != NULL && bump2Prop != NULL){
-
-		if( bump1Prop->getObjectId() == data.getObjectIdA() || bump1Prop->getObjectId() == data.getObjectIdB() )
-		{
-
-			if((ballProp->getObjectId() == data.getObjectIdA() || ballProp->getObjectId() == data.getObjectIdB())){
-
-				ObjectProperty* comboProperty= GameObjectSystem::GetSingleton().editProperty(ComboControllerProperty::COMBO_CONTROLLER_PROPERTY_ID, bump1Prop->getObjectId());
-
-				if(comboProperty!=NULL){
-					ComboControllerProperty* combo=static_cast<ComboControllerProperty*>(comboProperty);
-
-					if(combo->isCompleted())
-					{
-						shoot = true;
-						if(!powerShoot)
-							oldSpeed = (static_cast<PhysicsBody*>(ballProp))->getSpeed();
-
-					}else{
-						// reset velocita
-						shoot = false;
-						powerShoot = false;
-
-						if(oldSpeed > 0.0f)
-							(static_cast<PhysicsBody*>(ballProp))->setSpeed(oldSpeed);
-
-
-					}
-
-				}
-
-			}
-		}
-
-		if( bump2Prop->getObjectId() == data.getObjectIdA() || bump2Prop->getObjectId() == data.getObjectIdB() )
-		{
-
-			if((ballProp->getObjectId() == data.getObjectIdA() || ballProp->getObjectId() == data.getObjectIdB())){
-
-				ObjectProperty* comboProperty= GameObjectSystem::GetSingleton().editProperty(ComboControllerProperty::COMBO_CONTROLLER_PROPERTY_ID, bump2Prop->getObjectId());
-
-				if(comboProperty!=NULL){
-					ComboControllerProperty* combo=static_cast<ComboControllerProperty*>(comboProperty);
-
-					if(combo->isCompleted())
-					{
-						shoot = true;
-
-						if(!powerShoot)
-							oldSpeed = (static_cast<PhysicsBody*>(ballProp))->getSpeed();
-
-					}else{
-
-
-						// reset velocita
-						shoot = false;
-						powerShoot = false;
-
-						if(oldSpeed > 0.0f)
-							(static_cast<PhysicsBody*>(ballProp))->setSpeed(oldSpeed);
-
-					}
-
-				}
-
-
-			}
-		}
-
-		if (shoot){
-
-			PhysicsBody* m_ballBody= static_cast<PhysicsBody*>(ballProp);
-			powerShoot = true;
-			m_ballBody->setSpeed(50);
-
-		}
-
-
-	}
-
-}
 
 void PositionControllerComponent::update(real frametime, real timestep)
 {
@@ -197,10 +107,4 @@ void PositionControllerComponent::update(real frametime, real timestep)
 		}
 
 	}	
-}
-
-void PositionControllerComponent::setCollisionPublisher(Publisher<CollisionObserver>* publisher){
-
-	m_subscribeCollisionObserver.Subscribe(publisher);
-
 }

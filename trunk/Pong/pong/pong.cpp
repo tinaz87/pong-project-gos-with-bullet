@@ -213,7 +213,7 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 
    //create components 
    PositionControllerComponent* positionControllerComponent= MV_NEW PositionControllerComponent();
-   PhysicsComponent* physicsComponent= MV_NEW PhysicsComponent(1<<16, 1<<16);
+   PhysicsComponent* physicsComponent= MV_NEW PhysicsComponent(1, 1);
    GraphicsComponent* graphicsComponent= MV_NEW GraphicsComponent(hWnd);
   
    //Sound Component
@@ -222,9 +222,9 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
    GameRulesComponent* gameRulesComponent= MV_NEW GameRulesComponent();
 
 
-   positionControllerComponent->setCollisionPublisher(&(physicsComponent->getCollisionPublisher()));
+  
    ScoreManager::GetSingleton().setCollisionPublisher(&physicsComponent->getCollisionPublisher());
-  // soundComponent->setCollisionPublisher(&physicsComponent->getCollisionPublisher());
+   //soundComponent->setCollisionPublisher(&physicsComponent->getCollisionPublisher());
    gameRulesComponent->setScorePublisher(&(ScoreManager::GetSingletonPtr()->getScorePublisher()));
   
 

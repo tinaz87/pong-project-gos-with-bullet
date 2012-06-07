@@ -17,6 +17,7 @@ public:
 	virtual void onLeave();
 	virtual void onFrame(real frametime, real timestep);
 
+	void ComboCheck(const CollisionData& data);
 
 	virtual void CollisionEvent(const CollisionData& data);
 	virtual void ScoreEvent(const ScoreData& data);
@@ -29,6 +30,8 @@ private:
 	PhysicsBody*	 m_ballBody;
 	real			 m_speed;
 
+	float oldSpeed;
+	bool powerShoot;
 
 	// Collision Oberver
 	SubscriberHelper<CollisionObserver> m_subscriberCollisionEvent;

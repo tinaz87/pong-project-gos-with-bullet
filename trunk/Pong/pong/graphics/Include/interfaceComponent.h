@@ -33,11 +33,18 @@ private:
 
 };
 
-struct GfxInterfaceText{
+class GfxInterfaceText{
+
+public:
+
+	GfxInterfaceText(){};
 
 	InterfaceRectangle rect;
 	std::string text;
 	bool active;
+	D3DCOLOR fontColor;
+
+	~GfxInterfaceText(){};
 
 };
 
@@ -58,10 +65,6 @@ public:
 	GfxInterface();
 	~GfxInterface();
 
-	
-
-	
-
 
 	void initializeText(LPDIRECT3DDEVICE9 m_pd3dDevice) const;
 
@@ -77,8 +80,6 @@ public:
 private:	
 
 	mutable LPD3DXFONT m_font;
-
-	mutable D3DCOLOR fontColor;
 
 	mutable RECT rct;
 

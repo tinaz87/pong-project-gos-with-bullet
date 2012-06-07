@@ -19,9 +19,11 @@ void EndState::onEnter()
 
 		endText = MV_NEW GfxInterfaceText();
 
-		endText->rect = InterfaceRectangle(300,350,300,200);
+		endText->rect = InterfaceRectangle(250,325,400,200);
 
 		endText->text = "The End ... Premi R per ricominciare...";
+
+		endText->fontColor = D3DCOLOR_ARGB(255,255,0,255); 
 
 		ObjectProperty* prop = GameObjectSystem::GetSingleton().editProperty(GfxInterface::INTERFACE_PROPERTY_ID,GfxInterface::INTERFACE_PROPERTY_OBJ_ID);
 

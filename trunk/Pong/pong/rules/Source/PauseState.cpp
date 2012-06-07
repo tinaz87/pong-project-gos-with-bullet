@@ -1,6 +1,5 @@
 #include "PauseState.h"
 #include "GameObjectSystem.h"
-//#include "KeyboardInputManager.h"
 #include "physicsComponent.h"
 #include "PositionControllerComponent.h"
 
@@ -19,9 +18,11 @@ void PauseState::onEnter()
 
 		pauseText = MV_NEW GfxInterfaceText();
 
-		pauseText->rect = InterfaceRectangle(300,350,300,200);
+		pauseText->rect = InterfaceRectangle(190,325,385,200);
 
-		pauseText->text = "Pausa... Premi P per tornare in gioco...";
+		pauseText->text = "Pausa...Premi P per tornare in gioco...";
+
+		pauseText->fontColor = D3DCOLOR_ARGB(255,255,255,255); 
 
 		ObjectProperty* prop = GameObjectSystem::GetSingleton().editProperty(GfxInterface::INTERFACE_PROPERTY_ID,GfxInterface::INTERFACE_PROPERTY_OBJ_ID);
 
