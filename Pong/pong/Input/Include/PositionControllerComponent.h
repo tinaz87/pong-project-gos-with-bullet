@@ -1,10 +1,9 @@
 #pragma once
 #include "Component.h"
-#include "CollisionObserver.h"
-#include "Subscriber.h"
 
 
-class PositionControllerComponent: public Component,public CollisionObserver
+
+class PositionControllerComponent: public Component
 {
 
 public:
@@ -14,15 +13,8 @@ public:
 	virtual void update(real frametime, real timestep);
 
 
-	virtual void CollisionEvent(const CollisionData& data);
-
-
-	void setCollisionPublisher(Publisher<CollisionObserver>* publisher);
-
 private:
 
-	SubscriberHelper<CollisionObserver> m_subscribeCollisionObserver;
 
-	float oldSpeed;
-	bool powerShoot;
+
 };
