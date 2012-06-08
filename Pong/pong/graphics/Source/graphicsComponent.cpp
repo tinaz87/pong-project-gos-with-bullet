@@ -7,7 +7,7 @@
 #include "graphicsDebugger.h"
 #include "physicsBody.h"
 #include "KeyboardInputManager.h"
-
+#include "GfxFont.h"
 
 // Our custom FVF, which describes our custom vertex structure
 #define D3DFVF_CUSTOMVERTEX (D3DFVF_XYZ|D3DFVF_DIFFUSE|D3DFVF_TEX1)
@@ -19,6 +19,7 @@ GraphicsComponent::GraphicsComponent(HWND hWnd)
 	,m_pD3D(NULL)
 	,m_pd3dDevice(NULL)
 	,m_graphicsDebugger(NULL)
+	,m_fontManager(NULL)
 {
 	// Create the D3D object.
 	if( NULL == ( m_pD3D = Direct3DCreate9( D3D_SDK_VERSION ) ) )
@@ -149,12 +150,27 @@ GraphicsComponent::GraphicsComponent(HWND hWnd)
 		m_graphicsDebugger= static_cast<GraphicsDebugger*>(debugGfxProperty);
 	}
 
-	ObjectProperty* interfaceGfxProperty = gameObjectSystem.editProperty(GfxInterface::INTERFACE_PROPERTY_ID, GfxInterface::INTERFACE_PROPERTY_OBJ_ID);
-	
-	if(interfaceGfxProperty!=NULL)
+	m_fontManager = MV_NEW FontMgr(m_pd3dDevice);
+	const ObjectPropertyTable* gfxFontMap =  gameObjectSystem.getProperties(GfxFont::GFX_FONT_ID);
+
+	if(gfxFontMap!=NULL)
 	{
-		m_interfaceCmp = static_cast<GfxInterface*>(interfaceGfxProperty);
-		m_interfaceCmp -> initializeText(m_pd3dDevice);
+		for(ObjectPropertyTable::const_iterator opIt= gfxFontMap->begin(); opIt != gfxFontMap->end(); ++opIt)
+		{
+			const GfxFont* gfxFont= static_cast<const GfxFont*>(opIt->second);
+
+			m_font.push_back(gfxFont);
+
+			HFont font;
+			uint8 s = gfxFont->getFontSize();
+
+			font = m_fontManager->getCreateFont(gfxFont->getFontName(),gfxFont->getFontSize());
+
+			m_Hfont.push_back(font);
+
+			
+		}
+
 	}
 
 }
@@ -163,6 +179,7 @@ GraphicsComponent::~GraphicsComponent()
 {
 	m_pTextureB.clear();
 	MV_DELETE(m_textureManager); //unload all textures
+	MV_DELETE(m_fontManager);
 	while(!m_pVB.empty())
 	{
 		LPDIRECT3DVERTEXBUFFER9 vertexBuffer= m_pVB.back();
@@ -241,8 +258,21 @@ void GraphicsComponent::update(real frametime, real timestep)
 												primitiveCount);	//primitive count
 		}
 		
+		for (uint32 i=0;i<m_font.size();++i)
+		{
+			if (!m_Hfont[i].isNull() && m_font[i]->isActive())
+			{
+				const std::string& text = m_font[i]->getText();
+				RECT rect =  m_font[i]->getTextRectangle().getRectangle();
+				const GfxColor& color = m_font[i]->getFontColor();
+				uint8 size = m_font[i]->getFontSize();
+				LPD3DXFONT font = m_fontManager->getFont(m_Hfont[i]);
+				
+				m_fontManager->getFont(m_Hfont[i])->DrawTextA(NULL,text.c_str(),-1,&rect,DT_LEFT,color.getColor());
 
-		m_interfaceCmp->displayText();
+			}
+		}
+		
  		// End the scene
  		m_pd3dDevice->EndScene();
  	}

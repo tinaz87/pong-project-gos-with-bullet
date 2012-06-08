@@ -95,18 +95,20 @@
     <None Include="utility\Include\Subscriber.inl" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\DXUT\Optional\SDKwavefile.h" />
     <ClInclude Include="gameObjects\Include\Component.h" />
     <ClInclude Include="gameObjects\Include\GameObjectSystem.h" />
     <ClInclude Include="gameObjects\Include\ObjectProperty.h" />
     <ClInclude Include="game\Include\background.h" />
     <ClInclude Include="game\Include\ball.h" />
     <ClInclude Include="game\Include\bumper.h" />
+    <ClInclude Include="game\Include\uiStateText.h" />
+    <ClInclude Include="graphics\Include\FontManager.h" />
+    <ClInclude Include="graphics\Include\gfxFont.h" />
     <ClInclude Include="graphics\Include\gfxGeometry.h" />
     <ClInclude Include="graphics\Include\gfxTexture.h" />
+    <ClInclude Include="graphics\Include\gfxUtilities.h" />
     <ClInclude Include="graphics\Include\graphicsComponent.h" />
     <ClInclude Include="graphics\Include\graphicsDebugger.h" />
-    <ClInclude Include="graphics\Include\interfaceComponent.h" />
     <ClInclude Include="graphics\Include\textureManager.h" />
     <ClInclude Include="Input\Include\ComboControllerProperty.h" />
     <ClInclude Include="Input\Include\InputManager.h" />
@@ -132,7 +134,6 @@
     <ClInclude Include="rules\Include\ScoreManager.h" />
     <ClInclude Include="rules\Include\ScoreObserver.h" />
     <ClInclude Include="rules\Include\StartState.h" />
-    <ClInclude Include="sound\Include\AudioWrapper.h" />
     <ClInclude Include="sound\Include\SfxEffect.h" />
     <ClInclude Include="sound\Include\SoundComponent.h" />
     <ClInclude Include="stdafx.h" />
@@ -151,18 +152,20 @@
     <ClInclude Include="utility\Include\TransitionObserver.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\DXUT\Optional\SDKwavefile.cpp" />
     <ClCompile Include="gameObjects\Source\Component.cpp" />
     <ClCompile Include="gameObjects\Source\GameObjectSystem.cpp" />
     <ClCompile Include="gameObjects\Source\ObjectProperty.cpp" />
+    <ClCompile Include="game\Include\uiStateText.cpp" />
     <ClCompile Include="game\Source\background.cpp" />
     <ClCompile Include="game\Source\ball.cpp" />
     <ClCompile Include="game\Source\bumper.cpp" />
+    <ClCompile Include="graphics\Source\FontManager.cpp" />
+    <ClCompile Include="graphics\Source\gfxFont.cpp" />
     <ClCompile Include="graphics\Source\gfxGeometry.cpp" />
     <ClCompile Include="graphics\Source\gfxTexture.cpp" />
+    <ClCompile Include="graphics\Source\gfxUtilities.cpp" />
     <ClCompile Include="graphics\Source\graphicsComponent.cpp" />
     <ClCompile Include="graphics\Source\graphicsDebugger.cpp" />
-    <ClCompile Include="graphics\Source\interfaceComponent.cpp" />
     <ClCompile Include="graphics\Source\textureManager.cpp" />
     <ClCompile Include="Input\Source\ComboControllerProperty.cpp" />
     <ClCompile Include="Input\Source\InputManager.cpp" />
@@ -184,7 +187,6 @@
     <ClCompile Include="rules\Source\ScoreManager.cpp" />
     <ClCompile Include="rules\Source\ScoreObserver.cpp" />
     <ClCompile Include="rules\Source\StartState.cpp" />
-    <ClCompile Include="sound\Source\AudioWrapper.cpp" />
     <ClCompile Include="sound\Source\SfxEffect.cpp" />
     <ClCompile Include="sound\Source\SoundComponent.cpp" />
     <ClCompile Include="stdafx.cpp">

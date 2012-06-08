@@ -71,6 +71,7 @@ FiniteStateMachine::~FiniteStateMachine()
 {
 	for(StateMap::iterator it= m_stateMap.begin(); it != m_stateMap.end(); ++it)
 	{
+	
 		MV_DELETE(it->second);
 	}
 	m_stateMap.clear();

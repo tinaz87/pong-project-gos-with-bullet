@@ -1,6 +1,9 @@
 #pragma once
 #include "FSMState.h"
 #include "StringHash.h"
+#include "gfxFont.h"
+
+class GameObjectSystem;
 
 class PauseState: public FSMState
 {
@@ -10,7 +13,10 @@ public:
 	virtual void onEnter();
 	virtual void onLeave();
 	virtual void onFrame(real frametime, real timestep) {}
+
+
 private:
-	static const ObjectId PAUSE_STATE_TEXT;
-	GfxInterfaceText* pauseText;
+
+	void SetMessageStatusActive(const bool status,GameObjectSystem& gameobject);
+
 };
