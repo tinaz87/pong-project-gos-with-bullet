@@ -4,41 +4,14 @@
 #include "PositionControllerComponent.h"
 #include "ScoreManager.h"
 
-
-const ObjectId EndState::END_STATE_TEXT = "END_STATE_TEXT_ID";
 EndState::EndState(const ObjectId& stateId)
-	:FSMState(stateId),endText(NULL)
+	:FSMState(stateId)
 {
 
 }
 
 void EndState::onEnter()
 {
-
-	if( !endText ){
-
-		endText = MV_NEW GfxInterfaceText();
-
-		endText->rect = InterfaceRectangle(250,325,400,200);
-
-		endText->text = "The End ... Premi R per ricominciare...";
-
-		endText->fontColor = D3DCOLOR_ARGB(255,255,0,255); 
-
-		ObjectProperty* prop = GameObjectSystem::GetSingleton().editProperty(GfxInterface::INTERFACE_PROPERTY_ID,GfxInterface::INTERFACE_PROPERTY_OBJ_ID);
-
-		if (prop != NULL)
-		{
-			GfxInterface* gfxInterface = static_cast<GfxInterface*>(prop);
-
-			gfxInterface->addText(END_STATE_TEXT,endText);
-
-			
-		}
-
-	}
-
-	endText->active = true;	
 
 	GameObjectSystem& gameobject = GameObjectSystem::GetSingleton();
 
@@ -55,11 +28,12 @@ void EndState::onEnter()
 		
 	}
 
+	SetMessageStatusActive(true,gameobject);
 
 }
-void EndState::onLeave(){
 
-	endText->active = false;
+
+void EndState::onLeave(){
 
 	GameObjectSystem& gameobject = GameObjectSystem::GetSingleton();
 
@@ -82,4 +56,28 @@ void EndState::onLeave(){
 		
 	}
 
+	SetMessageStatusActive(false,gameobject);
+}
+
+void EndState::SetMessageStatusActive(const bool status,GameObjectSystem& gameobject){
+
+
+
+	ObjectProperty* op = gameobject.editProperty(GfxFont::GFX_FONT_ID,ObjectId("EndGameState_1_ID"));
+	
+	if(op!=NULL){
+
+		GfxFont* pfont = static_cast<GfxFont*>(op);
+
+		pfont->setActive(status);
+	}
+	
+	op = gameobject.editProperty(GfxFont::GFX_FONT_ID,ObjectId("EndGameState_2_ID"));
+
+	if(op!=NULL){
+
+		GfxFont* pfont = static_cast<GfxFont*>(op);
+
+		pfont->setActive(status);
+	}
 }

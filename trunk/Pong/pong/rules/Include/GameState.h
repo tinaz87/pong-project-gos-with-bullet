@@ -3,10 +3,11 @@
 #include "StringHash.h"
 #include "CollisionObserver.h"
 #include "ScoreObserver.h"
+#include "gfxFont.h"
 
+class GameObjectSystem;
 
 class PhysicsBody;
-class GfxInterfaceText;
 
 class GameState: public FSMState,public CollisionObserver,public ScoreObserver
 {
@@ -25,6 +26,8 @@ public:
 	void setCollisionPublisher(Publisher<CollisionObserver>* publisher);
 	void setScorePublisher(Publisher<ScoreObserver>* publisher);
 
+		
+
 private:
 
 	PhysicsBody*	 m_ballBody;
@@ -37,13 +40,10 @@ private:
 	SubscriberHelper<CollisionObserver> m_subscriberCollisionEvent;
 	Publisher<CollisionObserver>* m_publisherCollisionEvent;
 
+	void SetMessageStatusActive(const bool status,GameObjectSystem& gameobject);
+
 	// Score Oberver
 	SubscriberHelper<ScoreObserver> m_subscriberScoreEvent;
 	Publisher<ScoreObserver>* m_publisherScoreEvent;
 
-	static const ObjectId GAME_STATE_TEXT_PLAYER_1;
-	static const ObjectId GAME_STATE_TEXT_PLAYER_2;
-
-	GfxInterfaceText* inGameScorePlayer1;
-	GfxInterfaceText* inGameScorePlayer2;
 };

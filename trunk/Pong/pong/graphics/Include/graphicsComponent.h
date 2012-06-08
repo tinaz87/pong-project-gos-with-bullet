@@ -2,13 +2,14 @@
 #include "d3d9.h"
 #include "Component.h"
 #include "textureManager.h"
-#include "interfaceComponent.h"
 #include "Allocator.h" //std::vector std::map stdext::hash_map includes
+#include "FontManager.h"
+
 
 class TextureMgr;
 class Position;
 class GraphicsDebugger;
-
+class GfxFont;
 
 class GraphicsComponent: public Component
 {
@@ -35,7 +36,11 @@ private:
 	MvVector<const Position*>m_position;
 	TextureMgr*				 m_textureManager;
 	
-	const GraphicsDebugger*	 m_graphicsDebugger;
-	const GfxInterface* m_interfaceCmp;
+	const GraphicsDebugger*	 m_graphicsDebugger;	
 
+
+	MvVector<HFont>		m_Hfont;
+	MvVector<const GfxFont*> m_font;
+
+	FontMgr*	m_fontManager;
 };

@@ -3,43 +3,19 @@
 #include "physicsComponent.h"
 #include "PositionControllerComponent.h"
 
-const ObjectId PauseState::PAUSE_STATE_TEXT = "PAUSE_STATE_ID";
+
 
 PauseState::PauseState(const ObjectId& stateId)
-	:FSMState(stateId),pauseText(NULL)
+	:FSMState(stateId)
 {
 	
 }
 
 void PauseState::onEnter()
 {
-
-	if( !pauseText ){
-
-		pauseText = MV_NEW GfxInterfaceText();
-
-		pauseText->rect = InterfaceRectangle(190,325,385,200);
-
-		pauseText->text = "Pausa...Premi P per tornare in gioco...";
-
-		pauseText->fontColor = D3DCOLOR_ARGB(255,255,255,255); 
-
-		ObjectProperty* prop = GameObjectSystem::GetSingleton().editProperty(GfxInterface::INTERFACE_PROPERTY_ID,GfxInterface::INTERFACE_PROPERTY_OBJ_ID);
-
-		if (prop != NULL)
-		{
-			GfxInterface* gfxInterface = static_cast<GfxInterface*>(prop);
-
-			gfxInterface->addText(PAUSE_STATE_TEXT,pauseText);
-
-			
-		}
-
-	}
-
-	pauseText->active = true;
-
 	GameObjectSystem& gameobject = GameObjectSystem::GetSingleton();
+
+	SetMessageStatusActive(true,gameobject);
 
 	Component* cmp = gameobject.editComponent(PhysicsComponent::PHYSICS_COMPONENT_ID);
 
@@ -76,5 +52,28 @@ void PauseState::onLeave()
 		
 	}
 
-	pauseText->active = false;
+	SetMessageStatusActive(false,gameobject);
+	
+}
+
+void PauseState::SetMessageStatusActive(const bool status,GameObjectSystem& gameobject){
+
+	ObjectProperty* op = gameobject.editProperty(GfxFont::GFX_FONT_ID,ObjectId("PauseState_1_ID"));
+	
+	if(op!=NULL){
+
+		GfxFont* pfont = static_cast<GfxFont*>(op);
+
+		pfont->setActive(status);
+	}
+
+	op = gameobject.editProperty(GfxFont::GFX_FONT_ID,ObjectId("PauseState_2_ID"));
+
+	if(op!=NULL){
+
+		GfxFont* pfont = static_cast<GfxFont*>(op);
+
+		pfont->setActive(status);
+	}
+
 }

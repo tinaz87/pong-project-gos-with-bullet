@@ -18,6 +18,7 @@
 #include "graphicsDebugger.h"
 #include "ScoreManager.h"
 #include "ComboControllerProperty.h"
+#include "uiStateText.h"
 #include "SoundComponent.h"
 
 #define MAX_LOADSTRING 100
@@ -181,6 +182,8 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
       return FALSE;
    }
 
+   uiStateText ui;
+
    //create objects
    Background background("test");
    Bumper bumperPlayer1("bump1", vector3(-90.f, 0.f, 0.f), true);
@@ -205,11 +208,6 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
    GraphicsDebugger* gfxDebugger= MV_NEW GraphicsDebugger();
    GameObjectSystem::GetSingleton().addProperty(gfxDebugger);
 #endif
-
-   // Add interface property
-   GfxInterface* gfxInterface = MV_NEW GfxInterface();
-   GameObjectSystem::GetSingleton().addProperty(gfxInterface);
-  
 
    //create components 
    PositionControllerComponent* positionControllerComponent= MV_NEW PositionControllerComponent();

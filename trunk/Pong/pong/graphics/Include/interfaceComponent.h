@@ -34,7 +34,7 @@ private:
 };
 
 class GfxInterfaceText{
-
+	
 public:
 
 	GfxInterfaceText(){};
@@ -56,7 +56,6 @@ class GfxInterface: public ObjectProperty
 {
 
 public:
-
 
 
 	static const StringHash INTERFACE_PROPERTY_ID;

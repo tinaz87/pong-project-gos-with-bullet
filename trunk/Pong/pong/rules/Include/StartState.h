@@ -1,20 +1,23 @@
 #pragma once
 #include "FSMState.h"
 #include "StringHash.h"
+#include "gfxFont.h"
 
-class GfxInterfaceText;
+
+class GameObjectSystem;
 
 class StartState: public FSMState
 {
 public:
 	StartState(const ObjectId& stateId);
-	~StartState(){}
+	~StartState();
 	virtual void onEnter();
 	virtual void onLeave();
 	virtual void onFrame(real frametime, real timestep) {}
+
+	void SetMessageStatusActive(const bool status,GameObjectSystem& gameobject);
+
 private:
 
-	static const ObjectId START_STATE_TEXT_ID;
 
-	GfxInterfaceText* startText;
 };

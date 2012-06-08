@@ -1,48 +1,31 @@
 #include "StartState.h"
-//#include "GameState.h"
-#include "GameObjectSystem.h"
 #include "physicsComponent.h"
 #include "PositionControllerComponent.h"
 #include "physicsBody.h"
-//#include "interfaceComponent.h"
+#include "GameObjectSystem.h"
 
-const ObjectId StartState::START_STATE_TEXT_ID = "START_STATE_ID";
+
 
 StartState::StartState(const ObjectId& stateId)
-	:FSMState(stateId),startText(NULL)
+	:FSMState(stateId)
 {
+	
+
+}
+
+
+StartState::~StartState(){
 	
 
 }
 
 void StartState::onEnter()
 {
-
-	if (!startText)
-	{
-		startText = MV_NEW GfxInterfaceText();
-
-		startText->rect = InterfaceRectangle(290,325,250,200);
-
-		startText->text = " --- Premi i Per iniziare --- ";
-
-		startText->fontColor = D3DCOLOR_ARGB(255,255,255,255); 
-
-		ObjectProperty* prop = GameObjectSystem::GetSingleton().editProperty(GfxInterface::INTERFACE_PROPERTY_ID,GfxInterface::INTERFACE_PROPERTY_OBJ_ID);
-
-		if (prop != NULL)
-		{
-			GfxInterface* gfxInterface = static_cast<GfxInterface*>(prop);
-
-			gfxInterface->addText(START_STATE_TEXT_ID,startText);
-		}
-		
-		
-	}
-
-	startText->active = true;
-
 	GameObjectSystem& gameobject = GameObjectSystem::GetSingleton();
+
+
+	SetMessageStatusActive(true,gameobject);
+
 
 	Component* cmp = gameobject.editComponent(PhysicsComponent::PHYSICS_COMPONENT_ID);
 
@@ -66,6 +49,8 @@ void StartState::onLeave()
 {
 	GameObjectSystem& gameobject = GameObjectSystem::GetSingleton();
 
+	SetMessageStatusActive(false,gameobject);
+
 	Component* cmp = gameobject.editComponent(PhysicsComponent::PHYSICS_COMPONENT_ID);
 
 	if (cmp != NULL){
@@ -81,7 +66,29 @@ void StartState::onLeave()
 		
 	}
 
-	startText->active = false;
+	/*startText->active = false;*/
 
+
+}
+
+void StartState::SetMessageStatusActive(const bool status,GameObjectSystem& gameobject){
+
+	ObjectProperty* op = gameobject.editProperty(GfxFont::GFX_FONT_ID,ObjectId("StartState_1_ID"));
+	
+	if(op!=NULL){
+
+		GfxFont* pfont = static_cast<GfxFont*>(op);
+
+		pfont->setActive(status);
+	}
+	
+	op = gameobject.editProperty(GfxFont::GFX_FONT_ID,ObjectId("StartState_2_ID"));
+
+	if(op!=NULL){
+
+		GfxFont* pfont = static_cast<GfxFont*>(op);
+
+		pfont->setActive(status);
+	}
 
 }

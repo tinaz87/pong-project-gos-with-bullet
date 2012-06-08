@@ -8,12 +8,9 @@
 #include "ComboControllerProperty.h"
 
 
-const ObjectId GameState::GAME_STATE_TEXT_PLAYER_1 = "SCOREPLAYER_1";
-const ObjectId GameState::GAME_STATE_TEXT_PLAYER_2 = "SCOREPLAYER_2";
-
 GameState::GameState(const ObjectId& stateId)
 	:FSMState(stateId)
-	,m_ballBody(NULL),m_speed(100),m_publisherCollisionEvent(NULL),inGameScorePlayer1(NULL),m_publisherScoreEvent(NULL),inGameScorePlayer2(NULL)
+	,m_ballBody(NULL),m_speed(100),m_publisherCollisionEvent(NULL),m_publisherScoreEvent(NULL)
 
 {
 	ObjectProperty* property= GameObjectSystem::GetSingleton().editProperty(PhysicsBody::PHY_BODY_ID, "ball1");
@@ -74,18 +71,7 @@ void GameState::CollisionEvent(const CollisionData& data){
 
 void GameState::ScoreEvent(const ScoreData& data){
 
-	std::stringstream sstring;
-
-	sstring<< "Points: "<< data.getScoreA();
-
-	inGameScorePlayer1->text = sstring.str();
-
-	sstring.str("");
-
-	sstring<< "Points: "<< data.getScoreB();
-
-	inGameScorePlayer2->text = sstring.str();
-
+	SetMessageStatusActive(true,GameObjectSystem::GetSingleton());
 
 }
 
@@ -104,6 +90,8 @@ void GameState::setScorePublisher(Publisher<ScoreObserver>* publisher){
 
 void GameState::onEnter(){
 
+	
+	
 	if (!m_publisherScoreEvent)	{
 
 		setScorePublisher(&(ScoreManager::GetSingleton().getScorePublisher()));
@@ -120,48 +108,9 @@ void GameState::onEnter(){
 		}
 	}
 
-	if (!inGameScorePlayer1 && !inGameScorePlayer2)
-	{
-		inGameScorePlayer1 = MV_NEW GfxInterfaceText();
-
-		inGameScorePlayer1->rect = InterfaceRectangle(20,20,200,200);
-
-		inGameScorePlayer1->fontColor = D3DCOLOR_ARGB(255,255,0,0); 
-
-		inGameScorePlayer2 = MV_NEW GfxInterfaceText();
-
-		inGameScorePlayer2->rect = InterfaceRectangle(680,20,200,200);
-
-		inGameScorePlayer2->fontColor = D3DCOLOR_ARGB(255,0,0,255); 
-
-		ObjectProperty* prop = GameObjectSystem::GetSingleton().editProperty(GfxInterface::INTERFACE_PROPERTY_ID,GfxInterface::INTERFACE_PROPERTY_OBJ_ID);
-
-		if (prop != NULL)
-		{
-			GfxInterface* gfxInterface = static_cast<GfxInterface*>(prop);
-
-			gfxInterface->addText(GAME_STATE_TEXT_PLAYER_1,inGameScorePlayer1);
-
-			gfxInterface->addText(GAME_STATE_TEXT_PLAYER_2,inGameScorePlayer2);
-		}
 
 
-	}
-
-	std::stringstream sstring;
-
-	sstring<< "Points:"<< ScoreManager::GetSingleton().getScore(1);
-
-	inGameScorePlayer1->text = sstring.str();
-
-	sstring.str("");
-
-	sstring<< "Points:"<< ScoreManager::GetSingleton().getScore(2);
-
-	inGameScorePlayer2->text = sstring.str();
-
-	inGameScorePlayer1->active = true;
-	inGameScorePlayer2->active = true;
+	SetMessageStatusActive(true,GameObjectSystem::GetSingleton());
 
 
 }
@@ -169,8 +118,6 @@ void GameState::onEnter(){
 
 void GameState::onLeave(){
 
-	//inGameScorePlayer1->active = false;
-	//inGameScorePlayer2->active = false;
 
 }
 
@@ -183,7 +130,7 @@ void GameState::onFrame(real frametime, real timestep){
 		m_ballBody->setSpeed(m_ballBody->getMaximumSpeed());
 	}
 
-
+	
 
 }
 
@@ -290,5 +237,42 @@ void GameState::ComboCheck(const CollisionData& data){
 	}
 
 
+
+}
+
+void GameState::SetMessageStatusActive(const bool status,GameObjectSystem& gameobject){
+
+	std::stringstream sstring;
+
+	ObjectProperty* op = gameobject.editProperty(GfxFont::GFX_FONT_ID,ObjectId("GameState_1_ID_L"));
+	
+	
+	if(op!=NULL){
+
+		GfxFont* pfont = static_cast<GfxFont*>(op);
+
+		sstring<< "Points:"<< ScoreManager::GetSingleton().getScore(1);
+
+		pfont->setText(sstring.str());	
+
+		pfont->setActive(status);
+	}
+
+	sstring.str("");
+	
+	sstring<< "Points:"<< ScoreManager::GetSingleton().getScore(2);
+		
+	op = gameobject.editProperty(GfxFont::GFX_FONT_ID,ObjectId("GameState_2_ID_R"));
+
+	if(op!=NULL){
+
+		GfxFont* pfont = static_cast<GfxFont*>(op);
+
+		pfont->setText(sstring.str());
+
+		pfont->setActive(status);
+	}
+
+	
 
 }
