@@ -195,7 +195,7 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 
    Bumper bumperPlayer2("bump2", vector3(90.f, 0.f, 0.f), true);
    PositionControllerProperty* controller2= MV_NEW PositionControllerProperty("bump2", 'O', 'L');
-   ComboControllerProperty* combo2 = MV_NEW ComboControllerProperty("bump2",'E','D');
+   ComboControllerProperty* combo2 = MV_NEW ComboControllerProperty("bump2",'U','J');
    GameObjectSystem::GetSingleton().addProperty(controller2);
    GameObjectSystem::GetSingleton().addProperty(combo2);
 
