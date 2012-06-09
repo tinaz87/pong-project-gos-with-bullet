@@ -44,7 +44,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>$(DXSDK_DIR)Include;$(OPEN_AL_ROOT)include;$(OPEN_AL_ROOT)freealut\include\AL;$(IncludePath)</IncludePath>
+    <IncludePath>$(DXSDK_DIR)Include;..\OpenALSDK\include;..\OpenALSDK\freealut\include\AL;$(IncludePath)</IncludePath>
     <LibraryPath>$(DXSDK_DIR)Include;$(LibraryPath);..\OpenALSDK\libs\Win32\;..\OpenALSDK\freealut\lib</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
