@@ -158,10 +158,10 @@
     <ClCompile Include="gameObjects\Source\Component.cpp" />
     <ClCompile Include="gameObjects\Source\GameObjectSystem.cpp" />
     <ClCompile Include="gameObjects\Source\ObjectProperty.cpp" />
-    <ClCompile Include="game\Include\uiStateText.cpp" />
     <ClCompile Include="game\Source\background.cpp" />
     <ClCompile Include="game\Source\ball.cpp" />
     <ClCompile Include="game\Source\bumper.cpp" />
+    <ClCompile Include="game\Source\uiStateText.cpp" />
     <ClCompile Include="graphics\Source\FontManager.cpp" />
     <ClCompile Include="graphics\Source\gfxFont.cpp" />
     <ClCompile Include="graphics\Source\gfxGeometry.cpp" />
