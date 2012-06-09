@@ -7,6 +7,8 @@
 #include "LinearMath/btVector3.h"
 #include "BulletCollision/CollisionShapes/btBoxShape.h"
 #include "Position.h"
+#include "SfxEffect.h"
+
 
 Background::Background(const char* backgroundFilename)
 	:m_backgroundFilename(backgroundFilename)
@@ -57,6 +59,12 @@ Background::Background(const char* backgroundFilename)
 	wallUpPosition->setPosition(MatrixPosition(wallUpTrx, wallUpDownRot));
 	GameObjectSystem::GetSingleton().addProperty(wallUpPosition);
 	PhysicsBody* wallUp= MV_NEW PhysicsBody("wall3", 0.f, wallShape);
+
+	// Create Sound
+	SfxEffect* sound = MV_NEW SfxEffect("wall3");
+	sound->setSound("../Media/Wavs/boing.wav");
+	sound->setLoopActive(false);
+	GameObjectSystem::GetSingleton().addProperty(sound);
 	
 	vector3 wallDownTrx(0.f, 107.5f, 0.f);
 	Position* wallDownPosition= MV_NEW Position("wall4");
@@ -64,6 +72,14 @@ Background::Background(const char* backgroundFilename)
 	wallDownPosition->setPosition(MatrixPosition(wallDownTrx, wallUpDownRot));
 	GameObjectSystem::GetSingleton().addProperty(wallDownPosition);
 	PhysicsBody* wallDown= MV_NEW PhysicsBody("wall4", 0.f, wallShape);
+
+	// Create Sound
+	sound = MV_NEW SfxEffect("wall4");
+	sound->setSound("../Media/Wavs/boing.wav");
+	sound->setLoopActive(false);
+	GameObjectSystem::GetSingleton().addProperty(sound);
+
+
 	
 	GameObjectSystem::GetSingleton().addProperty(wallRight);
 	GameObjectSystem::GetSingleton().addProperty(wallLeft);

@@ -237,6 +237,9 @@
     <ClInclude Include="game\Include\uiStateText.h">
       <Filter>game</Filter>
     </ClInclude>
+    <ClInclude Include="sound\Include\sound.h">
+      <Filter>sound</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -367,6 +370,9 @@
     </ClCompile>
     <ClCompile Include="game\Include\uiStateText.cpp">
       <Filter>game</Filter>
+    </ClCompile>
+    <ClCompile Include="sound\Source\sound.cpp">
+      <Filter>sound</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -7,6 +7,8 @@ const StringHash SoundComponent::SOUND_COMPONENT_ID= StringHash("SoundComponent"
 
 SoundComponent::SoundComponent():Component(SOUND_COMPONENT_ID,3){
 
+	//Initialize OpenAL
+	alutInit(NULL, 0);
 
 	GameObjectSystem& gameObjectSystem= GameObjectSystem::GetSingleton();
 	const ObjectPropertyTable* sfxEffectMap =  gameObjectSystem.getProperties(SfxEffect::SFX_EFFECT_ID);
@@ -59,16 +61,46 @@ void SoundComponent::CollisionEvent(const CollisionData& data){
 
 		if(data.getObjectIdA() == ObjectId("bump2") || data.getObjectIdB() == ObjectId("bump2")){
 
-		ObjectProperty* sfxProp = GameObjectSystem::GetSingleton().editProperty(SfxEffect::SFX_EFFECT_ID,ObjectId("bump2"));
+			ObjectProperty* sfxProp = GameObjectSystem::GetSingleton().editProperty(SfxEffect::SFX_EFFECT_ID,ObjectId("bump2"));
 
-		if (sfxProp != NULL){
+			if (sfxProp != NULL){
 
-			SfxEffect* sfx = static_cast<SfxEffect*>(sfxProp);
-			sfx->setToPlay();
+				SfxEffect* sfx = static_cast<SfxEffect*>(sfxProp);
+				sfx->setToPlay();
+
+			}
+
+		}else{
+
+			if(data.getObjectIdA() == ObjectId("wall3") || data.getObjectIdB() == ObjectId("wall3")){
+
+				ObjectProperty* sfxProp = GameObjectSystem::GetSingleton().editProperty(SfxEffect::SFX_EFFECT_ID,ObjectId("wall3"));
+
+				if (sfxProp != NULL){
+
+					SfxEffect* sfx = static_cast<SfxEffect*>(sfxProp);
+					sfx->setToPlay();
+
+				}
+
+			}else{
+
+				if(data.getObjectIdA() == ObjectId("wall4") || data.getObjectIdB() == ObjectId("wall4")){
+
+					ObjectProperty* sfxProp = GameObjectSystem::GetSingleton().editProperty(SfxEffect::SFX_EFFECT_ID,ObjectId("wall4"));
+
+					if (sfxProp != NULL){
+
+						SfxEffect* sfx = static_cast<SfxEffect*>(sfxProp);
+						sfx->setToPlay();
+
+					}
+
+				}
+
+			}
 
 		}
-
-	}
 
 
 	}

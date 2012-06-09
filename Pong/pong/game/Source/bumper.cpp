@@ -34,9 +34,10 @@ Bumper::Bumper(const std::string& bumperId, const vector3& posOffset, bool setKi
 
 	// Create Sound
 
-	/*SfxEffect* sound = MV_NEW SfxEffect(bumperObjId);
-	sound->setSound(L"Bee.wav");
-	GameObjectSystem::GetSingleton().addProperty(sound);*/
+	SfxEffect* sound = MV_NEW SfxEffect(bumperObjId);
+	sound->setSound("../Media/Wavs/Blip.wav");
+	sound->setLoopActive(false);
+	GameObjectSystem::GetSingleton().addProperty(sound);
 
 
 	//Create position

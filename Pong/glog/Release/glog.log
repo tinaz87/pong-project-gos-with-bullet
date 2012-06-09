@@ -1,1 +1,6 @@
-﻿
+﻿  logging.cc
+  raw_logging.cc
+  utilities.cc
+  vlog_is_on.cc
+  port.cc
+  glog.vcxproj -> C:\Users\PROBOOK\Desktop\MASTER\GamePlay Programming\Pong Progetto Esame\Pong\Release\glog.lib

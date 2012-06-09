@@ -2,75 +2,81 @@
 
 
  const StringHash SfxEffect::SFX_EFFECT_ID = "SFX_EFFECT_ID";
- //
+ 
 
- //SfxEffect::SfxEffect(const ObjectId& objectId):ObjectProperty(SFX_EFFECT_ID,objectId),
-	//											m_audio(NULL),m_toPlay(false)
- //{
-
-
- //}
-
- //SfxEffect::~SfxEffect(){
-
-	//
-	// delete m_audio;
-
- //}
- //
-
- //void SfxEffect::setSound(const LPCWSTR fileName){
-
-	// m_fileName = fileName; 
-
- //}
- //
- //void SfxEffect::PrepareAudio(){
-
-	//  if (!m_audio){
-
-	//	 m_audio = new AudioWrapper();
-	//	 m_audio->InitializeXAudio();
-	//	 m_audio->PrepareAudio(m_fileName);
-
-	// }
-
- //}
-
- //const bool SfxEffect::isReady() const{
-
-	// return m_audio->IsReady();
- //}
+ SfxEffect::SfxEffect(const ObjectId& objectId):ObjectProperty(SFX_EFFECT_ID,objectId),
+												m_audio(NULL),m_toPlay(false),m_fileName(""),m_Loop(false)
+ {
 
 
- //void SfxEffect::setToPlay(){
+ }
 
-	// m_toPlay = true;
- //}
+ SfxEffect::~SfxEffect(){
 
- //void SfxEffect::Update(float itime){
+	
+	 MV_DELETE( m_audio);
 
-	// m_audio->UpdateAudio(itime);
+ }
+ 
+ void SfxEffect::setLoopActive(const bool iactive){
 
- //}
+	 m_Loop = iactive;
+ }
 
- //const bool SfxEffect::isInPlay() const{
+ void SfxEffect::setSound(char* const fileName){
 
-	// return m_audio->IsPlaing();
- //}
+	 m_fileName = fileName; 
+
+ }
+ 
+ void SfxEffect::PrepareAudio(){
+
+	  if (!m_audio && m_fileName != "" ){
+
+		 m_audio = MV_NEW Sound();
+		 
+		 m_audio->LoadSound(m_fileName);
+
+		 m_audio->LoopSound(m_Loop);
+
+	 }
+
+ }
+
+ const bool SfxEffect::isReady() const{
+
+	 return m_audio->isReady();
+ }
 
 
- //void SfxEffect::Play(){
+ void SfxEffect::setToPlay(){
 
-	// if(m_audio->IsReady())
-	//	m_audio->PlayAudio();
+	 m_toPlay = true;
+ }
 
-	//  m_toPlay = false;
+ void SfxEffect::Update(float itime){
 
- //}
+	 m_audio->Update(itime);
 
- //const bool SfxEffect::isToPlay()const{
+ }
 
-	// return m_toPlay;
+ const bool SfxEffect::isInPlay() const{
 
- //}
+	 return m_audio->isPlaying();
+ }
+
+
+ void SfxEffect::Play(){
+
+	 if(m_audio->isReady())
+		m_audio->Play();
+
+	  m_toPlay = false;
+
+ }
+
+ const bool SfxEffect::isToPlay()const{
+
+	 return m_toPlay;
+
+ }

@@ -1,6 +1,6 @@
 #pragma once
 #include "ObjectProperty.h"
-//#include "AudioWrapper.h"
+#include "sound.h"
 
 
 class SfxEffect :public ObjectProperty{
@@ -9,38 +9,42 @@ public :
 
 	static const StringHash SFX_EFFECT_ID;
 
-	SfxEffect(const ObjectId& objectId):ObjectProperty(SFX_EFFECT_ID,objectId){}
+	SfxEffect(const ObjectId& objectId);
 
-	~SfxEffect(){}
+	~SfxEffect();
 
-	const bool isToPlay() const{return true;}
+	const bool isToPlay() const;
 
-	void setToPlay(){}
+	void setToPlay();
 	//const bool isToStop() const;
-	void setSound(const LPCWSTR fileName){}
+	void setSound(char* const  filename);
 
 	void setDescription(std::string& desc){}
 
-	void PrepareAudio(){}
+	void PrepareAudio();
 
-	const bool isReady()const{return true;}
+	const bool isReady()const;
 
-	void Play(){}
+	void Play();
 
-	void Update(float time){}
+	void setLoopActive(const bool iactive);
 
-	const bool isInPlay() const{return true;}
+	void Update(float time);
+
+	const bool isInPlay() const;
 
 
 
 private:
 
 	bool m_toPlay;
+
+	bool m_Loop;
 	
 	std::string m_description;
 
-//	AudioWrapper* m_audio;
+	Sound* m_audio;
 
-	LPCWSTR m_fileName;
+	char* m_fileName;
 
 };
