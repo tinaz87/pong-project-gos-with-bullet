@@ -66,9 +66,6 @@ void StartState::onLeave()
 		
 	}
 
-	/*startText->active = false;*/
-
-
 }
 
 void StartState::SetMessageStatusActive(const bool status,GameObjectSystem& gameobject){

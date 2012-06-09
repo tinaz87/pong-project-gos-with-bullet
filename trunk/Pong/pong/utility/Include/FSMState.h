@@ -9,7 +9,7 @@ class FSMState
 {
 public:
 	FSMState(const ObjectId& stateId);
-	~FSMState();
+	virtual ~FSMState();
 	const ObjectId&			getStateId() const;
 	void					addTransition(const ObjectId& transitionId, const ObjectId& stateId);
 	void					fireTransition(const ObjectId& transition);
