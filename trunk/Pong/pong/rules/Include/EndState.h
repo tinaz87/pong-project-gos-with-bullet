@@ -15,6 +15,9 @@ public:
 	virtual void onFrame(real frametime, real timestep) {}
 private:
 
-	void SetMessageStatusActive(const bool status,GameObjectSystem& gameobject);
+
+
+	GfxFont*	m_main;
+	GfxFont*	m_second;
 
 };

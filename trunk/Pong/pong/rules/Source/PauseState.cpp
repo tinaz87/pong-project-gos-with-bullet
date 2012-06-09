@@ -6,16 +6,34 @@
 
 
 PauseState::PauseState(const ObjectId& stateId)
-	:FSMState(stateId)
+	:FSMState(stateId),m_main(NULL),m_second(NULL)
 {
-	
+	ObjectProperty* op = GameObjectSystem::GetSingleton().editProperty(GfxFont::GFX_FONT_ID,ObjectId("CENTER_MAIN_ID"));
+
+	if(op!=NULL){
+
+		m_main = static_cast<GfxFont*>(op);
+
+	}
+
+	op = GameObjectSystem::GetSingleton().editProperty(GfxFont::GFX_FONT_ID,ObjectId("CENTER_SECOND_ID"));
+
+	if(op!=NULL){
+
+		m_second = static_cast<GfxFont*>(op);
+
+	}
 }
 
 void PauseState::onEnter()
 {
 	GameObjectSystem& gameobject = GameObjectSystem::GetSingleton();
 
-	SetMessageStatusActive(true,gameobject);
+	m_main->setText("  ***PAUSA***");
+	m_second->setText("    Premi P per Iniziare");
+	m_main->setActive(true);
+	m_second->setActive(true);
+
 
 	Component* cmp = gameobject.editComponent(PhysicsComponent::PHYSICS_COMPONENT_ID);
 
@@ -37,6 +55,9 @@ void PauseState::onLeave()
 
 	GameObjectSystem& gameobject = GameObjectSystem::GetSingleton();
 
+	m_main->setActive(false);
+	m_second->setActive(false);
+
 	Component* cmp = gameobject.editComponent(PhysicsComponent::PHYSICS_COMPONENT_ID);
 
 	if (cmp != NULL){
@@ -52,28 +73,6 @@ void PauseState::onLeave()
 		
 	}
 
-	SetMessageStatusActive(false,gameobject);
+
 	
-}
-
-void PauseState::SetMessageStatusActive(const bool status,GameObjectSystem& gameobject){
-
-	ObjectProperty* op = gameobject.editProperty(GfxFont::GFX_FONT_ID,ObjectId("PauseState_1_ID"));
-	
-	if(op!=NULL){
-
-		GfxFont* pfont = static_cast<GfxFont*>(op);
-
-		pfont->setActive(status);
-	}
-
-	op = gameobject.editProperty(GfxFont::GFX_FONT_ID,ObjectId("PauseState_2_ID"));
-
-	if(op!=NULL){
-
-		GfxFont* pfont = static_cast<GfxFont*>(op);
-
-		pfont->setActive(status);
-	}
-
 }

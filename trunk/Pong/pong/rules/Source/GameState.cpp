@@ -10,9 +10,30 @@
 
 GameState::GameState(const ObjectId& stateId)
 	:FSMState(stateId)
-	,m_ballBody(NULL),m_speed(100),m_publisherCollisionEvent(NULL),m_publisherScoreEvent(NULL)
+	,m_ballBody(NULL),
+	m_speed(100),
+	m_publisherCollisionEvent(NULL),
+	m_publisherScoreEvent(NULL),
+	m_right(NULL),
+	m_left(NULL)
 
 {
+	ObjectProperty* op = GameObjectSystem::GetSingleton().editProperty(GfxFont::GFX_FONT_ID,ObjectId("SCORE_SX"));
+
+	if(op!=NULL){
+
+		m_left = static_cast<GfxFont*>(op);
+
+	}
+
+	op = GameObjectSystem::GetSingleton().editProperty(GfxFont::GFX_FONT_ID,ObjectId("SCORE_DX"));
+
+	if(op!=NULL){
+
+		m_right = static_cast<GfxFont*>(op);
+
+	}
+
 	ObjectProperty* property= GameObjectSystem::GetSingleton().editProperty(PhysicsBody::PHY_BODY_ID, "ball1");
 	if(property != NULL)
 	{
@@ -71,7 +92,7 @@ void GameState::CollisionEvent(const CollisionData& data){
 
 void GameState::ScoreEvent(const ScoreData& data){
 
-	SetMessageStatusActive(true,GameObjectSystem::GetSingleton());
+	SetMessageStatusActive(true);
 
 }
 
@@ -90,7 +111,7 @@ void GameState::setScorePublisher(Publisher<ScoreObserver>* publisher){
 
 void GameState::onEnter(){
 
-	
+
 	
 	if (!m_publisherScoreEvent)	{
 
@@ -110,7 +131,7 @@ void GameState::onEnter(){
 
 
 
-	SetMessageStatusActive(true,GameObjectSystem::GetSingleton());
+	SetMessageStatusActive(true);
 
 
 }
@@ -240,39 +261,25 @@ void GameState::ComboCheck(const CollisionData& data){
 
 }
 
-void GameState::SetMessageStatusActive(const bool status,GameObjectSystem& gameobject){
+void GameState::SetMessageStatusActive(const bool status){
 
 	std::stringstream sstring;
 
-	ObjectProperty* op = gameobject.editProperty(GfxFont::GFX_FONT_ID,ObjectId("GameState_1_ID_L"));
-	
-	
-	if(op!=NULL){
+	sstring<< "Points:"<< ScoreManager::GetSingleton().getScore(1);
 
-		GfxFont* pfont = static_cast<GfxFont*>(op);
+	m_left->setText(sstring.str());	
 
-		sstring<< "Points:"<< ScoreManager::GetSingleton().getScore(1);
-
-		pfont->setText(sstring.str());	
-
-		pfont->setActive(status);
-	}
+	m_left->setActive(status);
 
 	sstring.str("");
-	
+
 	sstring<< "Points:"<< ScoreManager::GetSingleton().getScore(2);
-		
-	op = gameobject.editProperty(GfxFont::GFX_FONT_ID,ObjectId("GameState_2_ID_R"));
 
-	if(op!=NULL){
+	m_right->setText(sstring.str());
 
-		GfxFont* pfont = static_cast<GfxFont*>(op);
+	m_right->setActive(status);
 
-		pfont->setText(sstring.str());
 
-		pfont->setActive(status);
-	}
 
-	
 
 }

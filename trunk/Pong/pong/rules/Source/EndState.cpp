@@ -7,13 +7,32 @@
 EndState::EndState(const ObjectId& stateId)
 	:FSMState(stateId)
 {
+	ObjectProperty* op = GameObjectSystem::GetSingleton().editProperty(GfxFont::GFX_FONT_ID,ObjectId("CENTER_MAIN_ID"));
 
+	if(op!=NULL){
+
+		m_main = static_cast<GfxFont*>(op);
+
+	}
+
+	op = GameObjectSystem::GetSingleton().editProperty(GfxFont::GFX_FONT_ID,ObjectId("CENTER_SECOND_ID"));
+
+	if(op!=NULL){
+
+		m_second = static_cast<GfxFont*>(op);
+
+	}
 }
 
 void EndState::onEnter()
 {
 
 	GameObjectSystem& gameobject = GameObjectSystem::GetSingleton();
+
+	m_main->setText("***THE END***");
+	m_second->setText("Premi R per Ricominciare");
+	m_main->setActive(true);
+	m_second->setActive(true);
 
 	Component* cmp = gameobject.editComponent(PhysicsComponent::PHYSICS_COMPONENT_ID);	
 
@@ -28,7 +47,7 @@ void EndState::onEnter()
 		
 	}
 
-	SetMessageStatusActive(true,gameobject);
+
 
 }
 
@@ -36,6 +55,10 @@ void EndState::onEnter()
 void EndState::onLeave(){
 
 	GameObjectSystem& gameobject = GameObjectSystem::GetSingleton();
+
+
+	m_main->setActive(false);
+	m_second->setActive(false);
 
 	Component* cmp = gameobject.editComponent(PhysicsComponent::PHYSICS_COMPONENT_ID);
 
@@ -56,28 +79,5 @@ void EndState::onLeave(){
 		
 	}
 
-	SetMessageStatusActive(false,gameobject);
-}
-
-void EndState::SetMessageStatusActive(const bool status,GameObjectSystem& gameobject){
-
-
-
-	ObjectProperty* op = gameobject.editProperty(GfxFont::GFX_FONT_ID,ObjectId("EndGameState_1_ID"));
 	
-	if(op!=NULL){
-
-		GfxFont* pfont = static_cast<GfxFont*>(op);
-
-		pfont->setActive(status);
-	}
-	
-	op = gameobject.editProperty(GfxFont::GFX_FONT_ID,ObjectId("EndGameState_2_ID"));
-
-	if(op!=NULL){
-
-		GfxFont* pfont = static_cast<GfxFont*>(op);
-
-		pfont->setActive(status);
-	}
 }
