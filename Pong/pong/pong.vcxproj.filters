@@ -368,11 +368,11 @@
     <ClCompile Include="graphics\Source\gfxUtilities.cpp">
       <Filter>graphics</Filter>
     </ClCompile>
-    <ClCompile Include="game\Include\uiStateText.cpp">
-      <Filter>game</Filter>
-    </ClCompile>
     <ClCompile Include="sound\Source\sound.cpp">
       <Filter>sound</Filter>
+    </ClCompile>
+    <ClCompile Include="game\Source\uiStateText.cpp">
+      <Filter>game</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
