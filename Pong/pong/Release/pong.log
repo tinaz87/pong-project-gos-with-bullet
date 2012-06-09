@@ -1,1 +1,57 @@
-﻿
+﻿  stdafx.cpp
+  Component.cpp
+  GameObjectSystem.cpp
+  ObjectProperty.cpp
+  uiStateText.cpp
+  background.cpp
+  ball.cpp
+  bumper.cpp
+  FontManager.cpp
+  gfxFont.cpp
+  gfxGeometry.cpp
+  gfxTexture.cpp
+  gfxUtilities.cpp
+  graphicsComponent.cpp
+  graphicsDebugger.cpp
+  textureManager.cpp
+  ComboControllerProperty.cpp
+  InputManager.cpp
+  KeyboardInputManager.cpp
+  PositionControllerComponent.cpp
+  PositionControllerProperty.cpp
+  Compilazione in corso...
+  hpha.cpp
+  collisionObserver.cpp
+  motionState.cpp
+  physicsBody.cpp
+  physicsComponent.cpp
+  physicsGfxDebugger.cpp
+  position.cpp
+  pong.cpp
+  EndState.cpp
+  gameRulesComponent.cpp
+  GameState.cpp
+  PauseState.cpp
+  ScoreManager.cpp
+  ScoreObserver.cpp
+  StartState.cpp
+  SfxEffect.cpp
+  sound.cpp
+sound\Source\sound.cpp(94): warning C4996: 'alutLoadWAVFile': è stato dichiarato obsoleto
+          C:\Program Files\OpenAL 1.1 SDK\freealut\include\AL\alut.h(113): vedere la dichiarazione di 'alutLoadWAVFile'
+sound\Source\sound.cpp(96): warning C4996: 'alutUnloadWAV': è stato dichiarato obsoleto
+          C:\Program Files\OpenAL 1.1 SDK\freealut\include\AL\alut.h(116): vedere la dichiarazione di 'alutUnloadWAV'
+sound\Source\sound.cpp(234): warning C4800: 'const ALboolean': imposto valore booleano 'true' o 'false' (avviso di prestazioni)
+  SoundComponent.cpp
+  dataTypes.cpp
+  FiniteStateMachine.cpp
+  Compilazione in corso...
+  FSMState.cpp
+  StringHash.cpp
+  TransitionObserver.cpp
+     Creazione della libreria C:\Users\PROBOOK\Desktop\MASTER\GamePlay Programming\Pong Progetto Esame\Pong\Release\pong.lib e dell'oggetto C:\Users\PROBOOK\Desktop\MASTER\GamePlay Programming\Pong Progetto Esame\Pong\Release\pong.exp in corso...
+LINK : warning LNK4098: la libreria predefinita 'LIBCMT' è in conflitto con l'utilizzo di altre librerie; utilizzare /NODEFAULTLIB:libreria
+  Generazione codice in corso...
+c:\users\probook\desktop\master\gameplay programming\pong progetto esame\pong\glog\windows\glog\logging.h(1501): warning C4722: 'google::NullStreamFatal::~NullStreamFatal': il distruttore non restituisce mai un valore, potenziale perdita di memoria
+  Generazione codice terminata
+  pong.vcxproj -> C:\Users\PROBOOK\Desktop\MASTER\GamePlay Programming\Pong Progetto Esame\Pong\Release\pong.exe
