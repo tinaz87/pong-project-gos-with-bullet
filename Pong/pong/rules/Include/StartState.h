@@ -15,9 +15,11 @@ public:
 	virtual void onLeave();
 	virtual void onFrame(real frametime, real timestep) {}
 
-	void SetMessageStatusActive(const bool status,GameObjectSystem& gameobject);
+	
 
 private:
+	GfxFont*	m_main;
+	GfxFont*	m_second;
 
 
 };

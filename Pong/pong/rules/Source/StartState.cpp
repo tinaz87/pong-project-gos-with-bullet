@@ -7,10 +7,24 @@
 
 
 StartState::StartState(const ObjectId& stateId)
-	:FSMState(stateId)
+	:FSMState(stateId),m_main(NULL),m_second(NULL)
 {
 	
+	ObjectProperty* op = GameObjectSystem::GetSingleton().editProperty(GfxFont::GFX_FONT_ID,ObjectId("CENTER_MAIN_ID"));
 
+	if(op!=NULL){
+
+		m_main = static_cast<GfxFont*>(op);
+
+	}
+
+	op = GameObjectSystem::GetSingleton().editProperty(GfxFont::GFX_FONT_ID,ObjectId("CENTER_SECOND_ID"));
+
+	if(op!=NULL){
+
+		m_second = static_cast<GfxFont*>(op);
+
+	}
 }
 
 
@@ -23,8 +37,11 @@ void StartState::onEnter()
 {
 	GameObjectSystem& gameobject = GameObjectSystem::GetSingleton();
 
+	m_main->setText("START GAME");
+	m_second->setText("    Premi i per Iniziare");
 
-	SetMessageStatusActive(true,gameobject);
+	m_main->setActive(true);
+	m_second->setActive(true);
 
 
 	Component* cmp = gameobject.editComponent(PhysicsComponent::PHYSICS_COMPONENT_ID);
@@ -49,7 +66,8 @@ void StartState::onLeave()
 {
 	GameObjectSystem& gameobject = GameObjectSystem::GetSingleton();
 
-	SetMessageStatusActive(false,gameobject);
+	m_main->setActive(false);
+	m_second->setActive(false);
 
 	Component* cmp = gameobject.editComponent(PhysicsComponent::PHYSICS_COMPONENT_ID);
 
@@ -64,28 +82,6 @@ void StartState::onLeave()
 			cmp->SetActiveStatus(true);
 
 		
-	}
-
-}
-
-void StartState::SetMessageStatusActive(const bool status,GameObjectSystem& gameobject){
-
-	ObjectProperty* op = gameobject.editProperty(GfxFont::GFX_FONT_ID,ObjectId("StartState_1_ID"));
-	
-	if(op!=NULL){
-
-		GfxFont* pfont = static_cast<GfxFont*>(op);
-
-		pfont->setActive(status);
-	}
-	
-	op = gameobject.editProperty(GfxFont::GFX_FONT_ID,ObjectId("StartState_2_ID"));
-
-	if(op!=NULL){
-
-		GfxFont* pfont = static_cast<GfxFont*>(op);
-
-		pfont->setActive(status);
 	}
 
 }

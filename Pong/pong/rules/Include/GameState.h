@@ -29,6 +29,8 @@ public:
 		
 
 private:
+	GfxFont*	m_left;
+	GfxFont*	m_right;
 
 	PhysicsBody*	 m_ballBody;
 	real			 m_speed;
@@ -40,7 +42,7 @@ private:
 	SubscriberHelper<CollisionObserver> m_subscriberCollisionEvent;
 	Publisher<CollisionObserver>* m_publisherCollisionEvent;
 
-	void SetMessageStatusActive(const bool status,GameObjectSystem& gameobject);
+	void SetMessageStatusActive(const bool status);
 
 	// Score Oberver
 	SubscriberHelper<ScoreObserver> m_subscriberScoreEvent;
