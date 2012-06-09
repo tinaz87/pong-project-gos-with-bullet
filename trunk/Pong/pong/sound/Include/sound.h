@@ -2,9 +2,9 @@
 #include <iostream>
 #include <conio.h>
 #include <stdlib.h>
-#include <al.h>
-#include <alc.h>
-#include <alut.h>
+#include "al.h"
+#include "alc.h"
+#include "alut.h"
 
 
 #define NUM_BUFFERS 1
